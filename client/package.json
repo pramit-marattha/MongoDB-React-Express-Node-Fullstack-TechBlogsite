@@ -1,45 +1,16 @@
 {
   "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.8",
-    "@testing-library/react": "^10.4.9",
-    "@testing-library/user-event": "^10.4.1",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.5.3",
-    "history": "^4.10.1",
-    "jquery": "^3.5.1",
-    "moment": "2.24.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-loading-skeleton": "^2.1.1",
-    "react-markdown": "^4.3.1",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1",
-    "react-spring": "^8.0.27"
-  },
+  "version": "1.0.0",
+  "description": "Tech BlogSite",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {}
+  "author": "pramit marattha",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^10.0.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
 }

@@ -67,4 +67,19 @@ exports.login = (req,res)=>{
         })
     });
 
-}
+};
+
+// signout and require login middlewares for protecting routes
+
+exports.logout = (req,res)=>{
+    res.clearCookie("token")
+    res.json({
+        message: "Successfully logged out"
+    });
+};
+
+
+exports.requireLogin = expressJwt({
+    secret: process.env.JWT_TOKEN_SECRET,
+    algorithms: ['RS256'] 
+});
