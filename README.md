@@ -22,5 +22,8 @@ Entire commit History
 | 852d776b09c675c64bca6a6009f50cbdc37aab90 | register actions and register alert notification added |
 | 007d34abd504a2b8f6a0b7cd1822db13699b7e36 | login actions and login alert notification added |
 | 20d4fdd5154efe7a0810222e713f7bcc5de06c94 | storing user information and token keys inside cookie and localStorage |
+| ff6e427b7f3940b3b36baecd98534a7380f78c0c | commit history updated |
+| 37c9d6b52ff86478009887599b020972da868e3a | clearing token and localstorage after logging out & conditionally hiding and showing signout button after authentication |
+| c97f61c9fbd4571848499ac1f985460fecf92547 | redirecting isAuthenticated user back to home page if they try to access login and register page |
 
 ```
