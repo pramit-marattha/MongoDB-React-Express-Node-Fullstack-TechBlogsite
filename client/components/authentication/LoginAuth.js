@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {login} from "../../actions/authentication.js";
+import {login,authenticate,isAuthenticated} from "../../actions/authentication.js";
 import Router from "next/router";
 
 const LoginAuth = () => {
@@ -24,7 +24,10 @@ const LoginAuth = () => {
                 // user token to cookie
                 // user information to localstorage
                 // authenticate the user
-                Router.push(`/`)
+                authenticate(data,()=>{
+                    Router.push(`/`) 
+                })
+                
             }
         });
     };
