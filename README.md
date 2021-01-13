@@ -20,5 +20,7 @@ Entire commit History
 | c4f19452700c40eb2f5dda86548ad8f12b00637b | readme updated |
 | 00236e5aa973531e157588c809145b3dafe1ba7d | signup form created |
 | 852d776b09c675c64bca6a6009f50cbdc37aab90 | register actions and register alert notification added |
+| 007d34abd504a2b8f6a0b7cd1822db13699b7e36 | login actions and login alert notification added |
+| 20d4fdd5154efe7a0810222e713f7bcc5de06c94 | storing user information and token keys inside cookie and localStorage |
 
 ```
