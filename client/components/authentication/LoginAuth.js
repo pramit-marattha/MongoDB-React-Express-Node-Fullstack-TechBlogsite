@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import {login,authenticate} from "../../actions/authentication.js";
+import React,{useState,useEffect} from 'react';
+import {login,authenticate,isAuthenticated} from "../../actions/authentication.js";
 import Router from "next/router";
 
 const LoginAuth = () => {
@@ -7,6 +7,11 @@ const LoginAuth = () => {
     const [info,setInfo] = useState({email:"",password:"",error:"",loading:false,message:"",showForm:true});
 
     const {email,password,error,loading,message,showForm} = info
+
+
+    useEffect(()=>{
+        isAuthenticated() && Router.push(`/`)
+    },[])
 
     const handleSubmit = event => {
         event.preventDefault();

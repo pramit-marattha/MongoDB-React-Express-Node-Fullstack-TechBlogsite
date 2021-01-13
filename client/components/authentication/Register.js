@@ -1,11 +1,17 @@
-import React,{useState} from 'react';
-import {signup} from "../../actions/authentication.js";
+import React,{useState,useEffect} from 'react';
+import {signup,isAuthenticated} from "../../actions/authentication.js";
+import Router from "next/router";
+
 
 const Register = () => {
 
     const [info,setInfo] = useState({name:"",email:"",password:"",error:"",loading:false,message:"",showForm:true});
 
     const {name,email,password,error,loading,message,showForm} = info
+
+      useEffect(()=>{
+        isAuthenticated() && Router.push(`/`)
+    },[])
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -24,6 +30,7 @@ const Register = () => {
             }
         });
     };
+
 
     const handleChange= name =>(event)=>{
         setInfo({...info,error:false,[name]: event.target.value});
