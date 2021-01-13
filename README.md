@@ -15,4 +15,6 @@ commit History
 | 13f5b3b42b417360299048e768b525d08ecdbf52 | importing react |
 | aafe0c7fb468f04112117e5898fc2472456d214f | Merge branch 'main' of https://github.com/pramit-marattha/Fullstack-MERN-Blogsite into main |
 | ac66b43e13aca8e63c381b62a6761101224a8b63 | login and register page added and navbar updated with respective links |
+| c4f19452700c40eb2f5dda86548ad8f12b00637b | readme updated |
+| 00236e5aa973531e157588c809145b3dafe1ba7d | signup form created |
 ```

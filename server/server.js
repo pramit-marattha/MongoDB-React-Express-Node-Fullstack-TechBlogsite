@@ -13,23 +13,20 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const url = process.env.MONGODB_URI
 
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify:false,
-  useUnifiedTopology: true
-}, (err) => {
-  if (!err) {
-      console.log('MongoDB database successfully connected.')
-  } else {
-      console.log('Error in DB connection: ' + err)
-  }
-});
+mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false,useUnifiedTopology: true })
+.then(() => console.log('MongoDatabase Successfully connected'))
+    .catch(err => {
+        console.log(err);
+    });
 
 // middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
+}
 
 // routes middlewares
 app.use("/api",blogRoutes);
