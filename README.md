@@ -25,5 +25,7 @@ Entire commit History
 | ff6e427b7f3940b3b36baecd98534a7380f78c0c | commit history updated |
 | 37c9d6b52ff86478009887599b020972da868e3a | clearing token and localstorage after logging out & conditionally hiding and showing signout button after authentication |
 | c97f61c9fbd4571848499ac1f985460fecf92547 | redirecting isAuthenticated user back to home page if they try to access login and register page |
+| 2555757aaa3e46c17e7231e04699bc56360e2761 | readme commit history updated |
+| 806163c9502a1a001ae5f7dfefb1b10be435feb8 | Adding authentication as well as admin middlewares |
 
 ```
