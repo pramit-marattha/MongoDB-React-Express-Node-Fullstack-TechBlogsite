@@ -32,6 +32,18 @@ export const login = (user) => {
         .catch(error => console.log(error));
 };
 
+export const logout =(next) =>{
+    removeCookie('token')
+    removeLocalStorage('user')
+    next();
+
+    return fetch(`${API}/api/logout`,{
+        method: "GET"
+    }).then(response =>{
+        console.log("Successfully Logged Out")
+    }).catch(err=> console.log(err))
+}
+
 // setting the cookie
 export const setCookie = (key,value)=>{
     if(process.browser){
@@ -53,7 +65,7 @@ export const removeCookie = (key)=>{
 // getting the cookie
 export const getCookie = (key)=>{
     if(process.browser){
-        cookie.get(key);
+       return cookie.get(key);
     }
 };
 

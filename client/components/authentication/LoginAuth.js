@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {login,authenticate,isAuthenticated} from "../../actions/authentication.js";
+import {login,authenticate} from "../../actions/authentication.js";
 import Router from "next/router";
 
 const LoginAuth = () => {
