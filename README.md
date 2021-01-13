@@ -11,4 +11,8 @@ commit History
 | ad69455171b965bd7db3bb6354ea690e46b91126 | authenticated login and implemented jwt token |
 | 4aea5d70c39c5954a1a14bc273f1e569705f7fd3 | nextjs installation |
 | d87ce7597c41428ac050d6279476fd2375ae4985 | bootstrapcdn reactstrap nextconfig and _document.js updated |
+| 6d6fc0ead1fff421a29cc1f5bb8de1667ef32b87 | Update README.md |
+| 13f5b3b42b417360299048e768b525d08ecdbf52 | importing react |
+| aafe0c7fb468f04112117e5898fc2472456d214f | Merge branch 'main' of https://github.com/pramit-marattha/Fullstack-MERN-Blogsite into main |
+| ac66b43e13aca8e63c381b62a6761101224a8b63 | login and register page added and navbar updated with respective links |
 ```
