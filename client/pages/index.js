@@ -1,9 +1,15 @@
-import Layout from "../components/Layout"
+import Layout from "../components/Layout";
+import Link from "next/link";
+
 
 const Index =() =>{
     return(
         <Layout>
-        <h2>Yoo This is working</h2>
+        <Link href="/signup"><a>Signup</a></Link>
+        <br/>
+        <Link href="/login"><a>Login</a></Link>
+        <br/>
+        <h2>Home Page</h2>
         </Layout>
     )
 }
