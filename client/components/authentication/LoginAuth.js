@@ -30,7 +30,11 @@ const LoginAuth = () => {
                 // user information to localstorage
                 // authenticate the user
                 authenticate(data,()=>{
-                    Router.push(`/`) 
+                    if(isAuthenticated() && isAuthenticated().role === 1){
+                        Router.push(`/admin`)
+                    } else {
+                        Router.push(`/user`)
+                    }
                 })
                 
             }
