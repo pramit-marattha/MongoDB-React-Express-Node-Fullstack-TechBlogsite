@@ -1,4 +1,6 @@
 #nprogress .bar {
-  height: 15px !important;
-  background-color: rgb(34, 159, 221);
+  height: 7px !important;
+  /* background-color: rgb(34, 118, 221); */
+  background-color: #00dbde;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
 }
