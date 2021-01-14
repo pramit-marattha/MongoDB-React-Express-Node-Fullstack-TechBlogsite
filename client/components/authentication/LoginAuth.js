@@ -31,9 +31,9 @@ const LoginAuth = () => {
                 // authenticate the user
                 authenticate(data,()=>{
                     if(isAuthenticated() && isAuthenticated().role === 1){
-                        Router.push(`/admin`)
+                        Router.push(`/adminDashboard`)
                     } else {
-                        Router.push(`/user`)
+                        Router.push(`/userDashboard`)
                     }
                 })
                 
@@ -54,7 +54,6 @@ const LoginAuth = () => {
     return (
 
         <form onSubmit={handleSubmit}>
-       
          {/* Email */}
          <div className="form-group">
             <input type="email" value={email} className="form-control" onChange={handleChange("email")} placeholder="Enter your @Email address"/>
