@@ -31,5 +31,8 @@ Entire commit History
 | af470c696b8269527c2b473a3878c25869df0299 | Adding authentication as well as admin middlewares |
 | a1416c7ed183add98bf976473e3ddbcbc1ea5e3a | creating seperate dashboard for user and admin |
 | 3a8ebb3d1150c2f7d6ef81c3d55c4c2c5c8a18bd | segregate and protect routes for both user and admin |
+| 760da6143c39aee8559bde8c84baa3ce7b5ff644 | Adding dashboard link for both admin and user in navigation header |
+| c9686aaedffc1a924ddebd3b55f32bc8bc86ba8e | creating categorySchema model and category controller in the backend |
+| ea2010997bb0e6fab23d902773e34c0851a104fe | Handling errors and avoiding duplicate category |
 
 ```
