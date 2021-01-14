@@ -56,6 +56,32 @@ const Header = (props) => {
             </button>
              </>
            )}
+
+           {isAuthenticated() && isAuthenticated().role === 0 &&(
+                <NavItem>
+                <button className="btn btn-light">
+              <NavLink>
+              <Link href="/userDashboard">
+              {`${isAuthenticated().name}'s Dashboard`}
+              </Link>
+              </NavLink>
+              </button>
+            </NavItem>
+            )}
+
+            {isAuthenticated() && isAuthenticated().role === 1 &&(
+                <NavItem>
+                <button className="btn btn-light">
+              <NavLink>
+              <Link href="/adminDashboard">
+              {`${isAuthenticated().name}'s Dashboard`}
+              </Link>
+              </NavLink>
+              </button>
+            </NavItem>
+            )}
+
+
             {/* {JSON.stringify(isAuthenticated())} */}
             {isAuthenticated() && (
                 <NavItem>

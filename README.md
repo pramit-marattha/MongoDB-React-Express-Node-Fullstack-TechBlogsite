@@ -1,8 +1,9 @@
 # Fullstack-MERN-Blogsite
-Fullstack Blogsite built using React as a frontend , express js (backend framework) and MongoDB as a database.Also, implemented various features like form validation ,user authentication(signup and login functionalities) ,separate user profiles, reset password, forgot password and much more. 
+
+Fullstack Blogsite built using React as a frontend , express js (backend framework) and MongoDB as a database.Also, implemented various features like form validation ,user authentication(signup and login functionalities) ,separate user profiles, reset password, forgot password and much more.
 
 Step By Step Build:
-Entire commit History 
+Entire commit History
 
 ```
 | a7241c556cc959b383d3d578e3dd0d95329fcaf5 | Fullstack Mern blogsite |
@@ -27,5 +28,8 @@ Entire commit History
 | c97f61c9fbd4571848499ac1f985460fecf92547 | redirecting isAuthenticated user back to home page if they try to access login and register page |
 | 2555757aaa3e46c17e7231e04699bc56360e2761 | readme commit history updated |
 | 806163c9502a1a001ae5f7dfefb1b10be435feb8 | Adding authentication as well as admin middlewares |
+| af470c696b8269527c2b473a3878c25869df0299 | Adding authentication as well as admin middlewares |
+| a1416c7ed183add98bf976473e3ddbcbc1ea5e3a | creating seperate dashboard for user and admin |
+| 3a8ebb3d1150c2f7d6ef81c3d55c4c2c5c8a18bd | segregate and protect routes for both user and admin |
 
 ```
