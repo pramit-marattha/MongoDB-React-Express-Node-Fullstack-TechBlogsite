@@ -34,5 +34,7 @@ Entire commit History
 | 760da6143c39aee8559bde8c84baa3ce7b5ff644 | Adding dashboard link for both admin and user in navigation header |
 | c9686aaedffc1a924ddebd3b55f32bc8bc86ba8e | creating categorySchema model and category controller in the backend |
 | ea2010997bb0e6fab23d902773e34c0851a104fe | Handling errors and avoiding duplicate category |
+| 76bc2bdb0594c674d8f5d43aeea817f5516d6944 | creating,listing,reading and deleting category |
+| 844d59771007e67414d916364910afc30b89f16f | creating tagSchema model and tag controller and handling errors and avoiding duplicate tag in the backend |
 
 ```
