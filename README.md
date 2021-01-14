@@ -6,7 +6,6 @@ Fullstack Blogsite built using React as a frontend , express js (backend framewo
 
 Step By Step Build:
 Entire commit History
-<big><pre>
 
 #### Starter (server setup & client Setup) => [ | Fullstack Mern blogsite |](https://github.com/pramit-marattha/MongoDB-React-Express-Node-Fullstack-TechBlogsite/commit/a7241c556cc959b383d3d578e3dd0d95329fcaf5)
 
@@ -65,5 +64,3 @@ Entire commit History
 ##### [ | Implementing a slim progress bar at the top of the header using nprogress npm package |](https://github.com/pramit-marattha/MongoDB-React-Express-Node-Fullstack-TechBlogsite/commit/4d78c7a33d82cf8206a9f630548769f1e6c19081)
 
 ##### [ | styling nprogress and adding some material icons |](https://github.com/pramit-marattha/MongoDB-React-Express-Node-Fullstack-TechBlogsite/commit/f10cb0f5860a1e05a3814a180745656d4433031f)
-
-</big></pre>
