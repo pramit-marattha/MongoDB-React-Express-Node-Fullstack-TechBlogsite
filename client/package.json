@@ -11,6 +11,9 @@
   "author": "pramit marattha",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@zeit/next-css": "^1.0.1",
     "isomorphic-fetch": "^3.0.0",
     "js-cookie": "^2.2.1",
     "next": "^10.0.5",

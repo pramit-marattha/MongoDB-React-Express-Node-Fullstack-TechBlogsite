@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import {signup,isAuthenticated} from "../../actions/authentication.js";
 import Router from "next/router";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
 
 
 const Register = () => {
@@ -60,7 +62,7 @@ const Register = () => {
         </div>
         {/* <div className =  */}
         <div className="col text-center">
-        <button className="btn btn-info pt-3 pb-3 pl-5 pr-5">Register</button>
+        <button className="btn btn-info pt-3 pb-3 pl-5 pr-5">Register{` `}<PersonAddIcon/>{` `}</button>
         </div>
         </form>
     )

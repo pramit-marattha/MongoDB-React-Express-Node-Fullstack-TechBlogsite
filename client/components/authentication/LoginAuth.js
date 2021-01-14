@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {login,authenticate,isAuthenticated} from "../../actions/authentication.js";
 import Router from "next/router";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 const LoginAuth = () => {
 
@@ -64,7 +65,7 @@ const LoginAuth = () => {
         </div>
         {/* <div className =  */}
         <div className="col text-center">
-        <button className="btn btn-info pt-3 pb-3 pl-5 pr-5">Login</button>
+        <button className="btn btn-info pt-3 pb-3 pl-5 pr-5">Login{` `}<VpnKeyIcon/>{` `}</button>
         </div>
         </form>
     )

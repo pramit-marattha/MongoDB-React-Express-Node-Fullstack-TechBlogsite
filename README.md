@@ -36,5 +36,6 @@ Entire commit History
 | ea2010997bb0e6fab23d902773e34c0851a104fe | Handling errors and avoiding duplicate category |
 | 76bc2bdb0594c674d8f5d43aeea817f5516d6944 | creating,listing,reading and deleting category |
 | 844d59771007e67414d916364910afc30b89f16f | creating tagSchema model and tag controller and handling errors and avoiding duplicate tag in the backend |
+| 4d78c7a33d82cf8206a9f630548769f1e6c19081 | Implementing a slim progress bar at the top of the header using nprogress npm package |
 
 ```

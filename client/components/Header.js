@@ -18,6 +18,10 @@ import {
   DropdownItem,
   NavbarText
 } from 'reactstrap';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -29,7 +33,7 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <>
       <Navbar color="light" light expand="md">
       <Link href="/">
         <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
@@ -43,16 +47,19 @@ const Header = (props) => {
              <button className="btn btn-success">
                 <Link href="/login">
               <NavLink>
+             <VpnKeyIcon/>
+             {`  `}
                 Login
               </NavLink>
                 </Link>
                 </button>
             </NavItem>
-
+              <div style={{ padding:"10px"}}></div>
                 <button className="btn btn-info">
             <NavItem>
                 <Link href="/signup">
               <NavLink>
+              <PersonAddIcon/>
                 Resgister
               </NavLink>
                 </Link>
@@ -62,7 +69,7 @@ const Header = (props) => {
              </>
            )}
 
-           {isAuthenticated() && isAuthenticated().role === 0 &&(
+           {isAuthenticated() && isAuthenticated().role === 0 &&( 
                 <NavItem>
                 <button className="btn btn-light">
               <NavLink>
@@ -72,27 +79,31 @@ const Header = (props) => {
               </NavLink>
               </button>
             </NavItem>
+
             )}
 
             {isAuthenticated() && isAuthenticated().role === 1 &&(
                 <NavItem>
                 <button className="btn btn-light">
               <NavLink>
+              <DashboardIcon/>
               <Link href="/adminDashboard">
-              {`${isAuthenticated().name}'s Dashboard`}
+              {`  ${isAuthenticated().name}'s Dashboard `}
               </Link>
               </NavLink>
               </button>
             </NavItem>
             )}
 
+            <div style={{ padding:"20px"}}></div>
 
             {/* {JSON.stringify(isAuthenticated())} */}
             {isAuthenticated() && (
                 <NavItem>
                 <button className="btn btn-danger">
               <NavLink onClick={()=>logout(()=>Router.push(`/login`))}>
-                Logout
+              <ExitToAppIcon/>
+              Logout
               </NavLink>
               </button>
             </NavItem>
@@ -101,7 +112,7 @@ const Header = (props) => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+    </>
   );
 }
 
