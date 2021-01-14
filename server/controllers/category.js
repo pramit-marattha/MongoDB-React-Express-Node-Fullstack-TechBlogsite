@@ -1,5 +1,6 @@
 const Category = require("../models/categorySchema");
-const slugify = require("slugify")
+const slugify = require("slugify");
+const {errorHandler} = require("../helpers/databaseErrorHandler")
 
 exports.create = (req,res)=>{
     const {name} = req.body
@@ -10,7 +11,7 @@ exports.create = (req,res)=>{
     category.save((err,data)=>{
         if (err){
             return res.status(400).json({
-                error:err
+                error:errorHandler(err)
             })
         }
         res.json(data)

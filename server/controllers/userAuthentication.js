@@ -82,7 +82,7 @@ exports.logout = (req,res)=>{
 
 exports.requireLogin = expressJwt({
     secret: process.env.JWT_TOKEN_SECRET,
-    algorithms: ['RS256'] 
+    algorithms: ['HS256'] 
 });
 
 
