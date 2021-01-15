@@ -1,5 +1,6 @@
 import Layout from "../../../components/Layout";
 import Admin from "../../../components/authentication/Admin";
+import Category from "../../../components/update/Category";
 import Link from "next/link";
 
 
@@ -13,11 +14,12 @@ const CategoryTag =() =>{
         <h2>Create Catagories and Tags</h2>
         </div>
         <div className="col-md-6 pt-5 pb-5">
-        <a>Categories</a>
+        <Category/>
         </div>
         <div className="col-md-6 pt-5 pb-5">
             <a>Tags</a>
         </div>
+
         </div>
         </div>
         </Admin>
