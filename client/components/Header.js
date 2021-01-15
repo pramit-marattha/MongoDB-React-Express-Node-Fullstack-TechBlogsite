@@ -4,6 +4,7 @@ import {APP_NAME} from "../config.js";
 import NProgress from "nprogress";
 import {logout,isAuthenticated} from "../actions/authentication.js";
 import Router from "next/router";
+import {useLoaded} from "../Hooks/useLoaded";
 import {
   Collapse,
   Navbar,
@@ -32,64 +33,56 @@ const Header = (props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const loaded = useLoaded();
+
   return (
     <>
       <Navbar color="light" light expand="md">
-      <Link href="/">
-        <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
-      </Link>
+        <NavLink href="/" className="font-weight-bold">{APP_NAME}</NavLink>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-           {!isAuthenticated() && (
+           {!isAuthenticated() && loaded && (
              <>
              <NavItem>
              <button className="btn btn-success">
-                <Link href="/login">
-              <NavLink>
+              <NavLink href="/login">
              <VpnKeyIcon/>
              {`  `}
                 Login
               </NavLink>
-                </Link>
                 </button>
             </NavItem>
               <div style={{ padding:"10px"}}></div>
                 <button className="btn btn-info">
             <NavItem>
-                <Link href="/signup">
-              <NavLink>
+              <NavLink href="/signup">
               <PersonAddIcon/>
                 Resgister
               </NavLink>
-                </Link>
             </NavItem>
 
             </button>
              </>
            )}
 
-           {isAuthenticated() && isAuthenticated().role === 0 &&( 
+           {isAuthenticated() && loaded && isAuthenticated().role === 0 &&( 
                 <NavItem>
                 <button className="btn btn-light">
-              <NavLink>
-              <Link href="/userDashboard">
+              <NavLink href="/userDashboard">
               {`${isAuthenticated().name}'s Dashboard`}
-              </Link>
               </NavLink>
               </button>
             </NavItem>
 
             )}
 
-            {isAuthenticated() && isAuthenticated().role === 1 &&(
+            {isAuthenticated() && loaded && isAuthenticated().role === 1 &&(
                 <NavItem>
-                <button className="btn btn-light">
-              <NavLink>
+                <button className="btn btn-outline-primary">
+              <NavLink href="/adminDashboard">
               <DashboardIcon/>
-              <Link href="/adminDashboard">
               {`  ${isAuthenticated().name}'s Dashboard `}
-              </Link>
               </NavLink>
               </button>
             </NavItem>
@@ -98,7 +91,7 @@ const Header = (props) => {
             <div style={{ padding:"20px"}}></div>
 
             {/* {JSON.stringify(isAuthenticated())} */}
-            {isAuthenticated() && (
+            {isAuthenticated() && loaded && (
                 <NavItem>
                 <button className="btn btn-danger">
               <NavLink onClick={()=>logout(()=>Router.push(`/login`))}>
