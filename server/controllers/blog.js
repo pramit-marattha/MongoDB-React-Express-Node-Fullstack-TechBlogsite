@@ -1,3 +1,3 @@
-exports.baseTimeRoute = (req,res)=>{
+exports.create = (req,res)=>{
     res.json({time: Date().toString()})
   }
