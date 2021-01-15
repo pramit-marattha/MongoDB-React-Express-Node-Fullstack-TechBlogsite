@@ -1,6 +1,6 @@
 const Category = require("../models/categorySchema");
 const slugify = require("slugify");
-const {errorHandler} = require("../helpers/databaseErrorHandler")
+const {errorHandler} = require("../helpers/databaseErrorHandler");
 
 exports.create = (req,res)=>{
     const {name} = req.body
