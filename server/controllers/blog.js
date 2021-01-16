@@ -62,7 +62,7 @@ exports.create = (req, res) => {
       blog.title = title;
       blog.body = body;
       // console.log("rerererr",body)
-      blog.excerpt = excerptTrim(body, 320, ' ', ' ...');
+      blog.excerpt = excerptTrim(body, 160, ' ', '.....');
       blog.slug = slugify(title).toLowerCase();
       blog.mtitle = `${title} | ${process.env.BLOG_NAME}`;
       blog.mdesc = stripHtml(body.substring(0,160));
