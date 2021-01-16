@@ -31,7 +31,7 @@ exports.create = (req, res) => {
       }
 
 
-      const { title, body, categories, tags } = fields;
+      const { title, body, categories, taglists } = fields;
 
 
       if (!title || !title.length) {
@@ -46,17 +46,17 @@ exports.create = (req, res) => {
           });
       }
 
-      // if (!categories || categories.length === 0) {
-      //     return res.status(400).json({
-      //         error: 'At least one category is required'
-      //     });
-      // }
+      if (!categories || categories.length === 0) {
+          return res.status(400).json({
+              error: 'Please select at leat one category'
+          });
+      }
 
-      // if (!tags || tags.length === 0) {
-      //     return res.status(400).json({
-      //         error: 'At least one tag is required'
-      //     });
-      // }
+      if (!taglists || taglists.length === 0) {
+          return res.status(400).json({
+              error: 'Please select at leat one tag'
+          });
+      }
 
       let blog = new Blog();
       blog.title = title;
@@ -68,9 +68,8 @@ exports.create = (req, res) => {
       blog.mdesc = stripHtml(body.substring(0,160));
       blog.postedBy = req.user._id;
       // categories and tags
-      // let arrayOfCategories = categories && categories.split(',');
-      // let arrayOfTags = tags && tags.split(',');
-
+      let allTheListOfCategories = categories && categories.split(',');
+      let allTheListOfTags = taglists && taglists.split(',');
       if (files.photo) {
           if (files.photo.size > 10000000) {
               return res.status(400).json({
@@ -86,32 +85,32 @@ exports.create = (req, res) => {
         // console.log("error_is_here",err)
 
               return res.status(400).json({
-                  error: "wrong bitch"
-                  // error: errorHandler(err)
+                  // error: "wrong bitch"
+                  error: errorHandler(err)
               });
           }
-          res.json(result);
-          // Blog.findByIdAndUpdate(result._id, { $push: { categories: arrayOfCategories } }, { new: true }).exec(
-              // (err, result) => {
-              //     if (err) {
-              //         return res.status(400).json({
-              //             error: errorHandler(err)
-              //         });
-              //     } else {
-              //         Blog.findByIdAndUpdate(result._id, { $push: { tags: arrayOfTags } }, { new: true }).exec(
-              //             (err, result) => {
-              //                 if (err) {
-              //                     return res.status(400).json({
-              //                         error: errorHandler(err)
-              //                     });
-              //                 } else {
-              //                     res.json(result);
-              //                 }
-                          // }
-                      // );
-                  // }
-              // }
-          // )
+          // res.json(result);
+          Blog.findByIdAndUpdate(result._id, { $push: { categories: allTheListOfCategories } }, { new: true }).exec(
+              (err, result) => {
+                  if (err) {
+                      return res.status(400).json({
+                          error: errorHandler(err)
+                      });
+                  } else {
+                      Blog.findByIdAndUpdate(result._id, { $push: { taglists: allTheListOfTags } }, { new: true }).exec(
+                          (err, result) => {
+                              if (err) {
+                                  return res.status(400).json({
+                                      error: errorHandler(err)
+                                  });
+                              } else {
+                                  res.json(result);
+                              }
+                          }
+                      );
+                  }
+              }
+          )
       });
   });
 };

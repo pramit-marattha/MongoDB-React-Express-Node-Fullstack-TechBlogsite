@@ -35,8 +35,16 @@ const BlogSchema = new mongoose.Schema(
             data: Buffer,
             contentType: String
         },
-        categories: [{ type: ObjectId, ref: 'Category'}],
-        tags: [{ type: ObjectId, ref: 'Tag'}],
+        categories: [
+            { type: ObjectId,
+             ref: 'Category',
+             required:true,
+             }],
+        taglists: [{ 
+            type: ObjectId,
+             ref: 'Tag',
+             required:true,
+             }],
         postedBy: {
             type: ObjectId,
             ref: 'Users'
