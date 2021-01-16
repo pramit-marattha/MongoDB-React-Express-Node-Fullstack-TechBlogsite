@@ -99,6 +99,7 @@ exports.authenticationMiddleware = (req,res,next)=>{
     })
 };
 
+
 exports.adminAuthenticationMiddleware = (req,res,next)=>{
     const authenticateAdminUserId = req.user._id
     User.findById({_id: authenticateAdminUserId}).exec((err,user)=>{
@@ -112,7 +113,6 @@ exports.adminAuthenticationMiddleware = (req,res,next)=>{
                 error:"Access Denied!. Only authorized for admins"
             });
         }
-
         req.profile = user 
         next()
     })

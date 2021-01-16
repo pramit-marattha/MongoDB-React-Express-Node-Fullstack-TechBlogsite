@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const {ObjectId} = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
 
 const BlogSchema = new mongoose.Schema(
     {
         title: {
             type: String,
             trim: true,
-            min: 5,
-            max: 150,
+            min: 3,
+            max: 160,
             required: true
         },
         slug: {
@@ -18,8 +18,8 @@ const BlogSchema = new mongoose.Schema(
         body: {
             type: {},
             required: true,
-            min: 300,
-            max: 3000000
+            min: 200,
+            max: 2000000
         },
         excerpt: {
             type: String,
@@ -35,11 +35,11 @@ const BlogSchema = new mongoose.Schema(
             data: Buffer,
             contentType: String
         },
-        categories:[{type: ObjectId, ref:"Category",required:true}],
-        taglists:[{type: ObjectId, ref:"Tag",required:true}],
-        postedBy:{
+        categories: [{ type: ObjectId, ref: 'Category'}],
+        tags: [{ type: ObjectId, ref: 'Tag'}],
+        postedBy: {
             type: ObjectId,
-            ref:"Users"
+            ref: 'Users'
         }
     },
     { timestamps: true }
