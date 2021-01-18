@@ -14,15 +14,24 @@ const AdminIndex =() =>{
         </div>
         <div className="col-md-4 pt-5 pb-5">
         <ul className="list-group">
+        {/* // new category  */}
                 <li className="list-group-item">
                   <Link href="/adminDashboard/update/category-tag">
                       <a>Create new category</a>
                   </Link>
              </li>
 
+        {/* // new tag  */}
              <li className="list-group-item">
                   <Link href="/adminDashboard/update/category-tag">
                       <a>Create new tag</a>
+                  </Link>
+             </li>
+
+        {/* // new blog */}
+              <li className="list-group-item">
+                  <Link href="/adminDashboard/update/blog">
+                      <a>Create new blog</a>
                   </Link>
              </li>
                 </ul>
