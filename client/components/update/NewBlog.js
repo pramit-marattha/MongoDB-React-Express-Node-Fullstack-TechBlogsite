@@ -27,6 +27,8 @@ const NewBlog = ({router})=>{
         return false;
     };
 
+    const [categories,setCategories] = useState([])
+    const [taglists,setTaglists] = useState([])
     const [body,setBody] = useState(getBlogFromLocalStorage())
     const [infos,setInfos] = useState({
         error:"",
@@ -41,7 +43,27 @@ const NewBlog = ({router})=>{
 
     useEffect(()=>{
         setInfos({...infos, formData: new FormData()})
-    },[router])
+        initializeCategories()
+        initializeTaglists()
+    },[router]);
+
+    const initializeCategories = ()=>{
+        getCategories().then(data=>{
+            if(error){
+                setInfos({...infos,error:data.error})
+            } else
+            setCategories(data)
+        })
+    }
+
+    const initializeTaglists = ()=>{
+        getTagLists().then(data=>{
+            if(error){
+                setInfos({...infos,error:data.error})
+            } else
+            setTaglists(data)
+        })
+    };
 
     const publishTheBlog = (event)=>{
         event.preventDefault();
@@ -62,6 +84,28 @@ const NewBlog = ({router})=>{
         if(typeof window !== "undefined"){
             localStorage.setItem("blog",JSON.stringify(event))
         }
+    };
+
+    const displayCategories = ()=>{
+        return (
+            categories && categories.map((cat,index)=>(
+                <li key={index} className="list-unstyled">
+                <input type="checkbox" className="mr-2"/>
+                <label className="form-check-label">{cat.name}</label>
+                </li>
+        ))
+        )
+    };
+
+     const displayTagslists = ()=>{
+        return (
+            taglists && taglists.map((tagg,index)=>(
+                <li key={index} className="list-unstyled">
+                <input type="checkbox" className="mr-2"/>
+                <label className="form-check-label">{tagg.name}</label>
+                </li>
+        ))
+        )
     };
 
     ////////////////////
@@ -92,11 +136,26 @@ const NewBlog = ({router})=>{
     }
 
     return (
-        <>
-        <div>
+        <div className="container-fluid">
+        <div className="row">
+        <div className="col-md-8">
         {createBlogForm()}
         </div>
-        </>
+        <div className="col-md-4">
+        <div>
+        <h6>Categories</h6>
+        <hr style={{"backgroundColor":"white"}}/>
+        <ul style={{maxHeight:"170px",overflowY:"scroll",textTransform:"uppercase"}}>{displayCategories()}</ul>
+        <hr style={{"backgroundColor":"white"}}/>
+        </div>
+        <div>
+        <h6>Tags</h6>
+        <hr style={{"backgroundColor":"white"}}/>
+        <ul style={{maxHeight:"200px",overflowY:"scroll",textTransform:"uppercase"}}>{displayTagslists()}</ul>
+        </div>
+        </div>
+        </div>
+        </div>
     )
 };
 
