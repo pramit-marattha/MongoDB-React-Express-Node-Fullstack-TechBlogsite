@@ -14,179 +14,219 @@ import {createBlog} from "../../actions/blog";
 const ReactQuill = dynamic(() => import("react-quill"),{ssr:false});  
 
 
-const NewBlog = ({router})=>{
-
-    const getBlogFromLocalStorage =()=>{
-        if (typeof window === "undefined"){
+const NewBlog = ({ router }) => {
+    const blogFromLS = () => {
+        if (typeof window === 'undefined') {
             return false;
         }
 
-        if(localStorage.getItem("blog")){
-            return JSON.parse(localStorage.getItem("blog"))
-        } else
-        return false;
-    };
-
-    const [categories,setCategories] = useState([])
-    const [taglists,setTaglists] = useState([])
-    const [body,setBody] = useState(getBlogFromLocalStorage())
-    const [infos,setInfos] = useState({
-        error:"",
-        sizeError:"",
-        success:"",
-        formData:"",
-        title:"",
-        hidePublishButton:false
-    });
-
-    const {error,sizeError,success,formData,title,hidePublishButton} = infos
-
-    useEffect(()=>{
-        setInfos({...infos, formData: new FormData()})
-        initializeCategories()
-        initializeTaglists()
-    },[router]);
-
-    const initializeCategories = ()=>{
-        getCategories().then(data=>{
-            if(error){
-                setInfos({...infos,error:data.error})
-            } else
-            setCategories(data)
-        })
-    }
-
-    const initializeTaglists = ()=>{
-        getTagLists().then(data=>{
-            if(error){
-                setInfos({...infos,error:data.error})
-            } else
-            setTaglists(data)
-        })
-    };
-
-    const publishTheBlog = (event)=>{
-        event.preventDefault();
-    }
-
-    const handleChange=(name)=>event=>{
-        // console.log(event.target.value);
-        const info = name === "photo" ? event.target.files[0] : event.target.value
-        formData.set(name,info)
-        setInfos({...infos,[name]:info, formData,error:''})
-
-    };
-
-    const handleBody =(event)=>{
-        // console.log(event)
-        setBody(event)
-        formData.set("body",event)
-        if(typeof window !== "undefined"){
-            localStorage.setItem("blog",JSON.stringify(event))
+        if (localStorage.getItem('blog')) {
+            return JSON.parse(localStorage.getItem('blog'));
+        } else {
+            return false;
         }
     };
 
-    const displayCategories = ()=>{
-        return (
-            categories && categories.map((cat,index)=>(
-                <li key={index} className="list-unstyled">
-                <input type="checkbox" className="mr-2"/>
-                <label className="form-check-label">{cat.name}</label>
-                </li>
-        ))
-        )
+    const [categories, setCategories] = useState([]);
+    const [taglists, setTaglists] = useState([]);
+
+    const [checked, setChecked] = useState([]); // categories
+    const [checkedTag, setCheckedTag] = useState([]); // taglists
+
+    const [body, setBody] = useState(blogFromLS());
+    const [infos, setInfos] = useState({
+        error: '',
+        sizeError: '',
+        success: '',
+        formData: '',
+        title: '',
+        hidePublishButton: false
+    });
+
+    const { error, sizeError, success, formData, title, hidePublishButton } = infos;
+
+    useEffect(() => {
+        setInfos({ ...infos, formData: new FormData() });
+        initializeCategories();
+        initializeTaglists();
+    }, [router]);
+
+    const initializeCategories = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setInfos({ ...infos, error: data.error });
+            } else {
+                setCategories(data);
+            }
+        });
     };
 
-     const displayTagslists = ()=>{
-        return (
-            taglists && taglists.map((tagg,index)=>(
-                <li key={index} className="list-unstyled">
-                <input type="checkbox" className="mr-2"/>
-                <label className="form-check-label">{tagg.name}</label>
-                </li>
-        ))
-        )
+    const initializeTaglists = () => {
+        getTagLists().then(data => {
+            if (data.error) {
+                setInfos({ ...infos, error: data.error });
+            } else {
+                setTaglists(data);
+            }
+        });
     };
 
-    ////////////////////
+    const publishBlog = e => {
+        e.preventDefault();
+        console.log('ready to publishBlog');
+    };
 
+    const handleChange = name => e => {
+        // console.log(e.target.value);
+        const value = name === 'photo' ? e.target.files[0] : e.target.value;
+        formData.set(name, value);
+        setInfos({ ...infos, [name]: value, formData, error: '' });
+    };
 
+    const handleBody = e => {
+        // console.log(e);
+        setBody(e);
+        formData.set('body', e);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('blog', JSON.stringify(e));
+        }
+    };
 
-    /////////////////////////
-    
-    const createBlogForm =()=>{
+    const handleToggle = cat => () => {
+        setInfos({ ...infos, error: '' });
+        // return the first index or -1
+        const clickedCategory = checked.indexOf(c);
+        const all = [...checked];
+
+        if (clickedCategory === -1) {
+            all.push(c);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+        console.log(all);
+        setChecked(all);
+        formData.set('categories', all);
+    };
+
+    const displayCategories = () => {
         return (
-            <form onSubmit={publishTheBlog}>
-            <div className="form-group" >
-            <label className="text-muted">
-            Title
-            </label>
-            <input type="text" className="form-control" value={title} onChange={handleChange("title")}/>
-            </div>
-            <div className="form-group">
-            <ReactQuill modules={NewBlog.modules} formats={NewBlog.formats} style={{"backgroundColor":"white","color":"black"}} value={body} placeholder="Sketch your blog..." onChange={handleBody}/>
-            </div>
-            <div>
-            <button type="submit" className="btn btn-info">
-            publish
-            </button>
-            </div>
+            categories &&
+            categories.map((cat, index) => (
+                <li key={index} className="list-unstyled">
+                    <input onChange={handleToggle(cat._id)} type="checkbox" className="mr-2" />
+                    <label className="form-check-label">{cat.name}</label>
+                </li>
+            ))
+        );
+    };
+
+    const displayTaglists = () => {
+        return (
+            taglists &&
+            taglists.map((tagg, index) => (
+                <li key={index} className="list-unstyled">
+                    <input type="checkbox" className="mr-2" />
+                    <label className="form-check-label">{tagg.name}</label>
+                </li>
+            ))
+        );
+    };
+
+    const createBlogForm = () => {
+        return (
+            <form onSubmit={publishBlog}>
+                <div className="form-group">
+                    <label className="text-muted">Title</label>
+                    <input type="text" className="form-control" value={title} onChange={handleChange('title')} placeholder="Please enter a title" />
+                </div>
+
+                <div className="form-group">
+                    <ReactQuill
+                        placeholder="Write your blog ♥"
+                        style={{backgroundColor:"white",color:"black"}}
+                        modules={NewBlog.modules}
+                        formats={NewBlog.formats}
+                        value={body}
+                        onChange={handleBody}
+                    />
+                </div>
+
+                <div className="text-center">
+                    <button type="submit" className="btn btn-info pt-3 pb-3 pl-3 pr-3">
+                        Publish it
+                    </button>
+                </div>
             </form>
-        )
-    }
+        );
+    };
 
     return (
         <div className="container-fluid">
-        <div className="row">
-        <div className="col-md-8">
-        {createBlogForm()}
+            <div className="row">
+               
+
+                <div className="col-md-4">
+                    <div>
+                        <h5>Select Categories</h5>
+                        <hr style={{backgroundColor:"white"}}/>
+
+                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayCategories()}</ul>
+                    </div>
+                    <div>
+                    <hr style={{backgroundColor:"white"}}/>
+                        <h5>Select Tags</h5>
+                        <hr style={{backgroundColor:"white"}}/>
+                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayTaglists()}</ul>
+                    </div>
+                </div>
+                <div className="col-md-8">
+                    {createBlogForm()}
+                    {/* <hr />
+                    {JSON.stringify(title)}
+                    <hr />
+                    {JSON.stringify(body)}
+                    <hr />
+                    {JSON.stringify(categories)}
+                    <hr />
+                    {JSON.stringify(taglists)} */}
+                </div>
+            </div>
         </div>
-        <div className="col-md-4">
-        <div>
-        <h6>Categories</h6>
-        <hr style={{"backgroundColor":"white"}}/>
-        <ul style={{maxHeight:"170px",overflowY:"scroll",textTransform:"uppercase"}}>{displayCategories()}</ul>
-        <hr style={{"backgroundColor":"white"}}/>
-        </div>
-        <div>
-        <h6>Tags</h6>
-        <hr style={{"backgroundColor":"white"}}/>
-        <ul style={{maxHeight:"200px",overflowY:"scroll",textTransform:"uppercase"}}>{displayTagslists()}</ul>
-        </div>
-        </div>
-        </div>
-        </div>
-    )
+    );
 };
 
 NewBlog.modules = {
     toolbar: [
-        [{ header: [1,2,3,4,5,6] }, { font: [] }],
+        [{ header: '1' }, { header: '2' }, { header: [3, 4, 5, 6] }, { font: [] }],
         [{ size: [] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ list: 'ordered' }, { list: 'bullet' },{ 'align': [] }],
         ['link', 'image', 'video'],
+        [{ 'color': [] }, { 'background': [] }], 
         ['clean'],
         ['code-block']
     ]
 };
 
 NewBlog.formats = [
-    'header',
-    'font',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'link',
-    'image',
-    'video',
-    'code-block'
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "align",
+    "strike",
+    "script",
+    "blockquote",
+    "background",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "color",
+    "code-block"
 ];
-
 
 export default withRouter(NewBlog);
