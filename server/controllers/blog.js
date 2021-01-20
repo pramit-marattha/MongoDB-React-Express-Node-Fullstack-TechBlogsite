@@ -125,11 +125,48 @@ exports.list =(req,res)=>{
                 error: errorHandler(err)
             })
         }
+        res.json(data)
     })
 }
 
 exports.bloglistsallCategoriesTags =(req,res)=>{
-    
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0
+    let blogs 
+    let categories
+    let tags 
+    Blog.find({}).populate("categories","_id name slug").populate("taglists","_id name slug")
+    .populate("postedBy","_id name username profile").sort({createdAt: -1}).skip(skip).limit(limit) // second arguments is for particularly pupulating that specific field
+    .select("_id title slug excerpt categories taglists postedBy createdAt updatedAt")
+    .exec((err,data)=>{
+        if (err){
+            return res.json({
+                error: errorHandler(err)
+            })
+        }
+        blogs = data // we get all the blogs
+        // getting all the categories
+        Category.find({}).exec((err,cat)=>{
+            if (err){
+                return res.json({
+                    error: errorHandler(err)
+                })
+            }
+            categories = cat // get all the categories
+            // getting all the tags
+            Tag.find({}).exec((err,tagg)=>{
+                if (err){
+                    return res.json({
+                        error: errorHandler(err)
+                    })
+                }
+                tags = tagg
+                // return all the categories ,tags and the blogs
+                res.json({blogs,categories,tags,size: blogs.length});
+            })
+        })
+    })
+
 }
 
 exports.read =(req,res)=>{
