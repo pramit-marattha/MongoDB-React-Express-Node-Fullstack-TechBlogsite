@@ -8,6 +8,7 @@ import {getCookie,isAuthenticated} from "../../actions/authentication";
 import {getCategories} from "../../actions/category"; 
 import {getTagLists} from "../../actions/tag"; 
 import {createBlog} from "../../actions/blog";
+import PublishIcon from '@material-ui/icons/Publish';
 
 
 // dynamically importing react quill
@@ -44,6 +45,7 @@ const NewBlog = ({ router }) => {
     });
 
     const { error, sizeError, success, formData, title, hidePublishButton } = infos;
+    const token = getCookie("token");
 
     useEffect(() => {
         setInfos({ ...infos, formData: new FormData() });
@@ -71,10 +73,24 @@ const NewBlog = ({ router }) => {
         });
     };
 
-    const publishBlog = e => {
-        e.preventDefault();
-        console.log('ready to publishBlog');
+    const publishBlog = event => {
+        event.preventDefault();
+        // console.log('ready to publishBlog');
+        createBlog(formData,token).then(data=>{
+            if(data.error){
+                setInfos({...infos,error:data.error})
+            } else {
+                setInfos({...infos,title:"",error:"",success:`"${data.title}" is successfully published`})
+                setBody("");
+                setCategories([]);
+                setTaglists([]);
+            }
+        })
     };
+
+    if (publishBlog.error){
+        console.log(error)
+    }
 
     const handleChange = name => e => {
         // console.log(e.target.value);
@@ -92,14 +108,14 @@ const NewBlog = ({ router }) => {
         }
     };
 
-    const handleToggle = cat => () => {
+    const handleCategoriesToggle = cat => () => {
         setInfos({ ...infos, error: '' });
         // return the first index or -1
-        const clickedCategory = checked.indexOf(c);
+        const clickedCategory = checked.indexOf(cat);
         const all = [...checked];
 
         if (clickedCategory === -1) {
-            all.push(c);
+            all.push(cat);
         } else {
             all.splice(clickedCategory, 1);
         }
@@ -108,12 +124,28 @@ const NewBlog = ({ router }) => {
         formData.set('categories', all);
     };
 
+    const handleTaglistsToggle = tagg => () => {
+        setInfos({ ...infos, error: '' });
+        // return the first index or -1
+        const clickedTags = checkedTag.indexOf(tagg);
+        const all = [...checkedTag];
+
+        if (clickedTags === -1) {
+            all.push(tagg);
+        } else {
+            all.splice(clickedTags, 1);
+        }
+        console.log(all);
+        setCheckedTag(all);
+        formData.set('taglists', all);
+    };
+
     const displayCategories = () => {
         return (
             categories &&
             categories.map((cat, index) => (
                 <li key={index} className="list-unstyled">
-                    <input onChange={handleToggle(cat._id)} type="checkbox" className="mr-2" />
+                    <input onChange={handleCategoriesToggle(cat._id)} type="checkbox" className="mr-2" />
                     <label className="form-check-label">{cat.name}</label>
                 </li>
             ))
@@ -125,7 +157,7 @@ const NewBlog = ({ router }) => {
             taglists &&
             taglists.map((tagg, index) => (
                 <li key={index} className="list-unstyled">
-                    <input type="checkbox" className="mr-2" />
+                    <input onChange={handleTaglistsToggle(tagg._id)} type="checkbox" className="mr-2" />
                     <label className="form-check-label">{tagg.name}</label>
                 </li>
             ))
@@ -153,7 +185,8 @@ const NewBlog = ({ router }) => {
 
                 <div className="text-center">
                     <button type="submit" className="btn btn-info pt-3 pb-3 pl-3 pr-3">
-                        Publish it
+                        Publish it {" "}
+                        <PublishIcon/>
                     </button>
                 </div>
             </form>
@@ -163,13 +196,20 @@ const NewBlog = ({ router }) => {
     return (
         <div className="container-fluid">
             <div className="row">
-               
-
                 <div className="col-md-4">
+                <div >
+                    <div className="form-group pb-2">
+                        <h4>Featured Background Image</h4>
+                        <hr style={{backgroundColor:"white"}}/>
+                        <small className="text-muted">Maximum file size : 1024kb </small>
+                        <label className="btn btn-outline-success">Upload Image
+                        <input onChange={handleChange("photo")} type="file" accept="image/*" hidden/>
+                        </label>
+                    </div>
+                </div>
                     <div>
                         <h5>Select Categories</h5>
                         <hr style={{backgroundColor:"white"}}/>
-
                         <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayCategories()}</ul>
                     </div>
                     <div>

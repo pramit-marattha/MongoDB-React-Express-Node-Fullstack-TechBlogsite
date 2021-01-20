@@ -7,7 +7,7 @@ const BlogSchema = new mongoose.Schema(
             type: String,
             trim: true,
             min: 3,
-            max: 160,
+            max: 1600,
             required: true
         },
         slug: {
@@ -19,7 +19,7 @@ const BlogSchema = new mongoose.Schema(
             type: {},
             required: true,
             min: 200,
-            max: 2000000
+            max: 5000000000
         },
         excerpt: {
             type: String,

@@ -1,6 +1,5 @@
 import fetch from "isomorphic-fetch";
-import {API} from "../config.js";
-import cookie from "js-cookie";
+import { API } from "../config.js";
 
 export const createBlog = (blog,token) => {
     return fetch(`${API}/api/blog`, {
