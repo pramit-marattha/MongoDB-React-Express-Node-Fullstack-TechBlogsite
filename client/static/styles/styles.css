@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 
 #nprogress .bar {
   height: 7px !important;
@@ -9,15 +8,20 @@
 }
 
 * {
-font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
 }
 
-body,html{
-  color:white;
-background:url("../assets/27263.jpg")no-repeat center center fixed;
--webkit-background-size: cover;
+body,
+html {
+  color: white;
+  background: url("../assets/27263.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color:pink;
+  color: pink;
+}
+
+.ql-editor {
+  min-height: 25rem;
 }

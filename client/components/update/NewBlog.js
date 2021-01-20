@@ -9,6 +9,7 @@ import {getCategories} from "../../actions/category";
 import {getTagLists} from "../../actions/tag"; 
 import {createBlog} from "../../actions/blog";
 import PublishIcon from '@material-ui/icons/Publish';
+import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
 
 
 // dynamically importing react quill
@@ -92,19 +93,19 @@ const NewBlog = ({ router }) => {
         console.log(error)
     }
 
-    const handleChange = name => e => {
+    const handleChange = name => event => {
         // console.log(e.target.value);
-        const value = name === 'photo' ? e.target.files[0] : e.target.value;
+        const value = name === 'photo' ? event.target.files[0] : event.target.value;
         formData.set(name, value);
         setInfos({ ...infos, [name]: value, formData, error: '' });
     };
 
-    const handleBody = e => {
+    const handleBody = event => {
         // console.log(e);
-        setBody(e);
-        formData.set('body', e);
+        setBody(event);
+        formData.set('body', event);
         if (typeof window !== 'undefined') {
-            localStorage.setItem('blog', JSON.stringify(e));
+            localStorage.setItem('blog', JSON.stringify(event));
         }
     };
 
@@ -164,6 +165,18 @@ const NewBlog = ({ router }) => {
         );
     };
 
+    const displayError=()=>{
+        return (
+            <div className="alert alert-danger" style={{display: error ? "" : "none"}}>{error}</div>
+        )
+    };
+    const displaySuccess=()=>{
+        return (
+            <div className="alert alert-success" style={{display: success ? "" : "none"}}>{success}</div>
+        )
+    };
+
+
     const createBlogForm = () => {
         return (
             <form onSubmit={publishBlog}>
@@ -176,8 +189,8 @@ const NewBlog = ({ router }) => {
                     <ReactQuill
                         placeholder="Write your blog ♥"
                         style={{backgroundColor:"white",color:"black"}}
-                        modules={NewBlog.modules}
-                        formats={NewBlog.formats}
+                        modules={ReactQuillModules}
+                        formats={ReactQuillFormats}
                         value={body}
                         onChange={handleBody}
                     />
@@ -204,6 +217,7 @@ const NewBlog = ({ router }) => {
                         <small className="text-muted">Maximum file size : 1024kb </small>
                         <label className="btn btn-outline-success">Upload Image
                         <input onChange={handleChange("photo")} type="file" accept="image/*" hidden/>
+                        {/* <img src={handleChange(setInfos([name]))}/> */}
                         </label>
                     </div>
                 </div>
@@ -217,10 +231,14 @@ const NewBlog = ({ router }) => {
                         <h5>Select Tags</h5>
                         <hr style={{backgroundColor:"white"}}/>
                         <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayTaglists()}</ul>
+                        
                     </div>
                 </div>
                 <div className="col-md-8">
+                     {displayError()}
+                    {displaySuccess()}
                     {createBlogForm()}
+                   
                     {/* <hr />
                     {JSON.stringify(title)}
                     <hr />
@@ -235,38 +253,5 @@ const NewBlog = ({ router }) => {
     );
 };
 
-NewBlog.modules = {
-    toolbar: [
-        [{ header: '1' }, { header: '2' }, { header: [3, 4, 5, 6] }, { font: [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ list: 'ordered' }, { list: 'bullet' },{ 'align': [] }],
-        ['link', 'image', 'video'],
-        [{ 'color': [] }, { 'background': [] }], 
-        ['clean'],
-        ['code-block']
-    ]
-};
-
-NewBlog.formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "align",
-    "strike",
-    "script",
-    "blockquote",
-    "background",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "color",
-    "code-block"
-];
 
 export default withRouter(NewBlog);

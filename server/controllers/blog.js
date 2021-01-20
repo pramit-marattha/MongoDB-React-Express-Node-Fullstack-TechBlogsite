@@ -36,31 +36,25 @@ exports.create = (req, res) => {
 
       if (!title || !title.length) {
           return res.status(400).json({
-              error: `${console.log('---------------------Title is required----------------------')}`
+              error: `--------------------->Title is required<----------------------`
           });
       }
 
-      if (!body || body.length < 200) {
+      if (!body || body.length < 200) {         
           return res.status(400).json({
-              error: `${console.log('--------------------Blog too short----------------------')}`
+              error: `-------------------->Blog is either short or too big<----------------------`
           });
       }
-
-      if (!body || body.length > 50000000) {
-        return res.status(400).json({
-            error: `${console.log('--------------------Blog too Big----------------------')}`
-        });
-    }
 
       if (!categories || categories.length === 0) {
           return res.status(400).json({
-              error: `${console.log('-------------------Please select at least one category-----------------')}`
+              error: '------------------->Please select at least one category<-----------------'
           });
       }
 
       if (!taglists || taglists.length === 0) {
           return res.status(400).json({
-              error: `${console.log('----------------------Please select at least one tag--------------------')}`
+              error: '---------------------->Please select at least one tag<--------------------'
           });
       }
 
