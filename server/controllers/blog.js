@@ -114,3 +114,32 @@ exports.create = (req, res) => {
       });
   });
 };
+
+//list,bloglistsallCategoriesTags,read,remove,update
+
+exports.list =(req,res)=>{
+    Blog.find({}).populate("categories","_id name slug").populate("taglists","_id name slug").populate("postedBy","_id name username") // second arguments is for particularly pupulating that specific field
+    .select("_id title slug excerpt categories taglists postedBy createdAt updatedAt").exec((err,data)=>{
+        if (err){
+            return res.json({
+                error: errorHandler(err)
+            })
+        }
+    })
+}
+
+exports.bloglistsallCategoriesTags =(req,res)=>{
+    
+}
+
+exports.read =(req,res)=>{
+    
+}
+
+exports.remove =(req,res)=>{
+    
+}
+
+exports.update =(req,res)=>{
+    
+}
