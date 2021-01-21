@@ -269,4 +269,4 @@ exports.photo =(req,res)=>{
         res.set('Content-Type',blog.photo.contentType)
         return res.send(blog.photo.data);
     })
-}
+};

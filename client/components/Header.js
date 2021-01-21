@@ -42,6 +42,20 @@ const Header = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
+
+          <>
+             <NavItem>
+             <button className="btn btn-outline-info">
+              <NavLink href="/blogs">
+             {`  `}
+                Blogs
+              </NavLink>
+                </button>
+                {`  `}
+            </NavItem>
+             </>
+
+              
            {!isAuthenticated() && loaded && (
              <>
              <NavItem>
@@ -65,6 +79,9 @@ const Header = (props) => {
             </button>
              </>
            )}
+
+
+          
 
            {isAuthenticated() && loaded && isAuthenticated().role === 0 &&( 
                 <NavItem>
