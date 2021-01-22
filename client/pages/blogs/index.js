@@ -12,7 +12,7 @@ const Blogs = ({blogs,categories,taglists,size}) => {
         return blogs.map((blog,index)=>(
             <article key={index}>
                 <Card blog={blog}/>
-                <hr style={{backgroundColor:"white"}}/>
+                <hr style={{backgroundColor:"white",height:"2px",width:"100%"}}/>
             </article>
         ))
     }

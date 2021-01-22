@@ -43,7 +43,11 @@ const Card =({blog})=>{
           <CategoryIcon style={{color:"limegreen"}}/>[{listAndDisplayAllCategories(blog)}]<LabelIcon style={{color:"teal"}}/>[{listAndDisplayAllTaglists(blog)}]
         </section>
         <div className="row">
-            <div className="col-md-4">Image-Background</div>
+            <div className="col-md-4">
+                <section>
+                    <img className="img img-fluid" style={{maxHeight:"120px",width:"auto"}} src={`${API}/api/blog/photo/${blog.slug}`} alt={blog.title}/>
+                </section>
+            </div>
             <div className="col-md-8">
                 <section>
                     <div className="pb-3">{renderHTML(blog.excerpt)}</div>
