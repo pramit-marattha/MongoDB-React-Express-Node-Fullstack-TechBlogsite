@@ -1,15 +1,34 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import {withRouter} from "next/router";
 import Layout from '../../components/Layout';
 import React,{ useState,useEffect } from 'react';
 import { listBlogsWithCategoriesAndTaglists } from '../../actions/blog';
-import { API } from '../../config';
 import Card from "../../components/blog/Card";
 import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
+import {API,DOMAIN,APP_NAME} from '../../config';
 
 
-const Blogs = ({blogs,categories,taglists,size}) => {
+const Blogs = ({blogs,categories,taglists,size,router}) => {
+
+    const head = ()=>{
+        <Head>
+            <title>Tech Blogs | {APP_NAME}</title>
+            <meta name="description" content="Tutorials and detail information about most recent tech news"/>
+            <Link rel="cannonical" href={`${DOMAIN}${router.pathname}`} />
+            <meta property="og:title" content={`Latest News about tech and various tutorials on various technology | ${APP_NAME}`}/>
+            <meta name="og:description" content="Tutorials and detail information about most recent tech news"/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:url" content={`${DOMAIN}${router.pathname}`}/>    
+            <meta property="og:site_name" content={`${APP_NAME}`}/>
+            <meta property="og:image" content={`${DOMAIN}/static/assets/27263.jpg`}/>
+            <meta property="og:image:secure_url" content={`${DOMAIN}/static/assets/27263.jpg`}/>
+            <meta property="og:image:type" content="image/jpg"/>
+            {/* <meta property="og:site_name" content={`${APP_NAME}`}/> */}
+        </Head>
+    }
+
     const listAndDisplayAllBlogs = ()=>{
         return blogs.map((blog,index)=>(
             <article key={index}>
@@ -41,6 +60,7 @@ const Blogs = ({blogs,categories,taglists,size}) => {
 
     return (
         <>
+        {head()}
         <Layout>
             <main>
                 <div className="container-fluid">
@@ -53,8 +73,6 @@ const Blogs = ({blogs,categories,taglists,size}) => {
                             <CategoryIcon style={{color:"limegreen"}}/>{listAndDisplayAllTheCategories()}
                                 <br/>
                                 <LabelIcon style={{color:"teal"}}/>{listAndDisplayAllTheTaglists()} 
-                                {/* {JSON.stringify(taglists)} */}
-                                {/* {JSON.stringify(categories)} */}
                             </div>
                         </section>
                     </header>
@@ -89,5 +107,4 @@ Blogs.getInitialProps =()=>{
     })
 };
 
-
-export default Blogs; 
+export default withRouter(Blogs); 
