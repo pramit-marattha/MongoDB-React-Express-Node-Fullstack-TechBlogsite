@@ -23,6 +23,7 @@
     "react-dom": "^17.0.1",
     "react-quill": "^1.4.0-beta.5",
     "react-render-html": "^0.6.0",
+    "react-scroll-progress-bar": "^1.1.12",
     "reactstrap": "^8.8.1"
   }
 }

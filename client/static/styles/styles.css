@@ -14,12 +14,15 @@
 body,
 html {
   color: white;
+  filter: blur(0.3px);
   background: url("../assets/27263.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: pink;
+  color: white;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
 }
 
 .ql-editor {

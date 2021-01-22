@@ -5,6 +5,7 @@ import NProgress from "nprogress";
 import {logout,isAuthenticated} from "../actions/authentication.js";
 import Router from "next/router";
 import {useLoaded} from "../Hooks/useLoaded";
+import BookIcon from '@material-ui/icons/Book';
 import {
   Collapse,
   Navbar,
@@ -23,6 +24,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ComputerIcon from '@material-ui/icons/Computer';
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -38,16 +40,17 @@ const Header = (props) => {
   return (
     <>
       <Navbar color="light" light expand="md">
-        <NavLink href="/" className="font-weight-bold">{APP_NAME}</NavLink>
+        <NavLink href="/" className="font-weight-bold"><ComputerIcon/> {APP_NAME}</NavLink>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
 
           <>
              <NavItem>
-             <button className="btn btn-outline-info">
+             <button className="btn btn-warning">
               <NavLink href="/blogs">
-             {`  `}
+             <BookIcon/>
+             {` `}
                 Blogs
               </NavLink>
                 </button>
@@ -58,6 +61,7 @@ const Header = (props) => {
               
            {!isAuthenticated() && loaded && (
              <>
+             <div style={{ padding:"10px"}}></div>
              <NavItem>
              <button className="btn btn-success">
               <NavLink href="/login">
@@ -84,6 +88,8 @@ const Header = (props) => {
           
 
            {isAuthenticated() && loaded && isAuthenticated().role === 0 &&( 
+                <>
+             <div style={{ padding:"10px"}}></div>
                 <NavItem>
                 <button className="btn btn-light">
               <NavLink href="/userDashboard">
@@ -91,10 +97,12 @@ const Header = (props) => {
               </NavLink>
               </button>
             </NavItem>
-
+            </>
             )}
 
             {isAuthenticated() && loaded && isAuthenticated().role === 1 &&(
+              <>
+             <div style={{ padding:"10px"}}></div>
                 <NavItem>
                 <button className="btn btn-outline-primary">
               <NavLink href="/adminDashboard">
@@ -103,6 +111,7 @@ const Header = (props) => {
               </NavLink>
               </button>
             </NavItem>
+            </>
             )}
 
             <div style={{ padding:"20px"}}></div>

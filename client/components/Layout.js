@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Header from "./Header";
+
+
 const Layout = ({children}) =>{
+
     return (
         <>
             <Header/>
