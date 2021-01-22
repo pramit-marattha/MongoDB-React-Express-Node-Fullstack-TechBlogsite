@@ -8,10 +8,10 @@ import Card from "../../components/blog/Card";
 import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
 import {API,DOMAIN,APP_NAME} from '../../config';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
-const Blogs = ({blogs,categories,taglists,size,router}) => {
-
+const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}) => {
     const head = ()=>{
         <Head>
             <title>Tech Blogs | {APP_NAME}</title>
@@ -29,6 +29,41 @@ const Blogs = ({blogs,categories,taglists,size,router}) => {
         </Head>
     }
 
+    const [skip,setSkip] = useState(0);
+    const [limit,setLimit] = useState(blogsLimit);
+    const [size,setSize] = useState(totalBlogs);
+    const [loadedBlogs,setLoadedBlogs] = useState([]);
+
+    const loadMoreBlogs = ()=>{
+        let toSkip = skip + limit
+        listBlogsWithCategoriesAndTaglists(toSkip, limit).then(data =>{
+            if(data.error){
+                console.log(data.error)
+            } else {
+                setLoadedBlogs([...loadedBlogs,...data.blogs])
+                setSize(data.size)
+                setSkip(toSkip)
+            }
+        })
+    };
+
+    const loadMoreBlogButton =()=>{
+        return (
+            size > 0 && size >= limit && (<button onClick={loadMoreBlogs} className="btn btn-info">Load More <ExpandMoreIcon/> </button>)
+        )
+    };
+    
+    const showingAllLoadedBlogs = ()=>{
+        return loadedBlogs.map((blog,index)=>{
+            return (
+                <article key={index}>
+                    <Card blog={blog}/>
+                <hr style={{backgroundColor:"white",height:"2px",width:"100%",filter:"blur(3px)"}}/>
+                </article>
+            )
+        })
+    };
+
     const listAndDisplayAllBlogs = ()=>{
         return blogs.map((blog,index)=>(
             <article key={index}>
@@ -36,7 +71,7 @@ const Blogs = ({blogs,categories,taglists,size,router}) => {
                 <hr style={{backgroundColor:"white",height:"2px",width:"100%",filter:"blur(3px)"}}/>
             </article>
         ))
-    }
+    };
 
     const listAndDisplayAllTheCategories =() =>{
         return categories.map((cat,index)=>{
@@ -77,13 +112,11 @@ const Blogs = ({blogs,categories,taglists,size,router}) => {
                         </section>
                     </header>
                 </div>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12">{listAndDisplayAllBlogs()}</div>
-                    </div>
-                </div>
+                <div className="container-fluid">{listAndDisplayAllBlogs()}</div>
+                <div className="container-fluid">{showingAllLoadedBlogs()}</div>
+                <div className="text-center pt-3 pb-5">{loadMoreBlogButton()}</div>
             </main>
-        </Layout>
+        </Layout>   
         </>
     );
 };
@@ -93,7 +126,9 @@ const Blogs = ({blogs,categories,taglists,size,router}) => {
 // getInitialProps can only be used on the pages not on the components
 
 Blogs.getInitialProps =()=>{
-    return listBlogsWithCategoriesAndTaglists().then(data =>{
+    let skip = 0
+    let limit = 3
+    return listBlogsWithCategoriesAndTaglists(skip,limit).then(data =>{
         if(data.error){
             console.log(data.error)
         } else {
@@ -101,7 +136,9 @@ Blogs.getInitialProps =()=>{
                 blogs: data.blogs,
                 categories: data.categories,
                 taglists: data.taglists,
-                size: data.size
+                totalBlogs: data.size,
+                blogsLimit: limit,
+                blogSkip: skip 
             };
         }
     })

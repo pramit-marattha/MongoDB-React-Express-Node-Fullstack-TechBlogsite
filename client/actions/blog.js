@@ -17,12 +17,17 @@ export const createBlog = (blog,token) => {
         .catch(error => console.log(error));
 };
 
-export const listBlogsWithCategoriesAndTaglists = (blog,token) => {
+export const listBlogsWithCategoriesAndTaglists = (skip,limit) => {
+    const data ={
+        limit,skip
+    }
     return fetch(`${API}/api/bloglists-categories-taglists`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-        }
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data)
     }).then(response => {
             return response.json();
         }).catch(error => console.log(error));

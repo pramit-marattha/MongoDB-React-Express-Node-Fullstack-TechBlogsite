@@ -43,7 +43,7 @@ const Card =({blog})=>{
         </Link>
     </header>
         <section>
-          <CategoryIcon style={{color:"limegreen"}}/>[{listAndDisplayAllCategories(blog)}]<LabelIcon style={{color:"teal"}}/>[{listAndDisplayAllTaglists(blog)}]
+        <CategoryIcon style={{color:"limegreen"}}/>[{listAndDisplayAllCategories(blog)}]<LabelIcon style={{color:"teal"}}/>[{listAndDisplayAllTaglists(blog)}]
         </section>
         <div className="row">
             <div className="col-md-4">
@@ -54,9 +54,7 @@ const Card =({blog})=>{
             <div className="col-md-8">
                 <section>
                     <div className="pb-3">{renderHTML(blog.excerpt)}</div>
-                    <Link href={`/blogs/${blog.slug}`}>
-                        <a className="btn btn-info  pt-2">Read more <MoreIcon/></a>
-                    </Link>
+                    <Link href={`/blogs/${blog.slug}`}><a className="btn btn-info  pt-2">Read more<MoreIcon/></a></Link>
                 </section>
             </div>
         </div>
