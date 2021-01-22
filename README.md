@@ -9,8 +9,10 @@ Fullstack Blogsite built using React as a frontend , express js (backend framewo
 </p>
 <img src="https://user-images.githubusercontent.com/37651620/105505774-77b29c80-5cf1-11eb-8487-4b52ce091a06.png" alt="drawing" width="auto"/>
 <img src="https://user-images.githubusercontent.com/37651620/105505790-7bdeba00-5cf1-11eb-899b-1274157939fe.png" alt="drawing" width="auto"/>
+<img src="https://user-images.githubusercontent.com/37651620/105528269-e18c6f80-5d0c-11eb-839b-60d5925e4cf8.png" alt="drawing" width="auto"/>
+<img src="https://user-images.githubusercontent.com/37651620/105528283-e4876000-5d0c-11eb-90d1-a76bb1a9859d.png" alt="drawing" width="auto"/>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/37651620/105505705-64073600-5cf1-11eb-9271-27e681501a32.png" alt="drawing" width="auto" height="700"/>
+<img src="https://user-images.githubusercontent.com/37651620/105505705-64073600-5cf1-11eb-9271-27e681501a32.png" alt="drawing" width="auto"/>
 </p>
 
 ---
