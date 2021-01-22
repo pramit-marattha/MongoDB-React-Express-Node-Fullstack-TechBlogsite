@@ -25,6 +25,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ComputerIcon from '@material-ui/icons/Computer';
+import Typical from 'react-typical'
+
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -39,8 +41,11 @@ const Header = (props) => {
 
   return (
     <>
-      <Navbar color="light" light expand="md">
-        <NavLink href="/" className="font-weight-bold"><ComputerIcon/> {APP_NAME}</NavLink>
+      <Navbar style={{boxShadow:"inset 0 0 2000px rgba(204, 255, 204, 0.4)",filter:"blur(0.4px)"}} light expand="md">
+      {/* <ComputerIcon style={{color:"teal"}}/> */}
+        <NavLink href="/" className="font-weight-bold">
+          <Typical steps={['TECH', 1000,'BLOG', 500,'SITE', 500,'TECHBLOGSITE', 500]} loop={Infinity} wrapper="p"/>
+        </NavLink>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

@@ -36,7 +36,7 @@ const Card =({blog})=>{
     }; 
 
     return (
-    <div className="lead pb-4" style={{boxShadow:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.1px)",borderRadius:"5px"}}>
+    <div className="lead pb-4" style={{boxShadow:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.1px)",borderRadius:"17px"}}>
     <header>
         <Link href={`/blogs/${blog.slug}`}>
             <a><h3 className="display-5 pt-4 pb-2 font-weight-bold pl-5">{blog.title}</h3></a>
@@ -48,7 +48,7 @@ const Card =({blog})=>{
         <div className="row">
             <div className="col-md-4">
                 <section>
-                    <img className="img img-fluid" style={{maxHeight:"120px",width:"auto"}} src={`${API}/api/blog/photo/${blog.slug}`} alt={blog.title}/>
+                    <img className="img img-fluid" style={{maxHeight:"120px",width:"auto",filter:"blur(0.5px)"}} src={`${API}/api/blog/photo/${blog.slug}`} alt={blog.title}/>
                 </section>
             </div>
             <div className="col-md-8">
