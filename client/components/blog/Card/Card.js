@@ -48,7 +48,7 @@ const Card =({blog})=>{
         <div className="row">
             <div className="col-md-4">
                 <section>
-                    <img className="img img-fluid" style={{maxHeight:"120px",width:"auto",filter:"blur(0.5px)"}} src={`${API}/api/blog/photo/${blog.slug}`} alt={blog.title}/>
+                    <img className="img img-fluid pl-3" style={{maxHeight:"290px",width:"auto",filter:"blur(0.5px)"}} src={`${API}/api/blog/photo/${blog.slug}`} alt={blog.title}/>
                 </section>
             </div>
             <div className="col-md-8">
@@ -59,7 +59,7 @@ const Card =({blog})=>{
             </div>
         </div>
         <section>
-        <p className="ml-2 pt-5 pb-1">
+        <p className="ml-2 pt-4 pb-1 pl-3">
             <div style={{backgroundColor:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.7px)",fontSize:"15px"}}> Author : {blog.postedBy.name} | Published {moment(blog.updatedAt).fromNow()} </div>
         </p>
     </section>
