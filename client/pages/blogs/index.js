@@ -5,6 +5,8 @@ import React,{ useState,useEffect } from 'react';
 import { listBlogsWithCategoriesAndTaglists } from '../../actions/blog';
 import { API } from '../../config';
 import Card from "../../components/blog/Card";
+import LabelIcon from '@material-ui/icons/Label';
+import CategoryIcon from '@material-ui/icons/Category';
 
 
 const Blogs = ({blogs,categories,taglists,size}) => {
@@ -12,10 +14,30 @@ const Blogs = ({blogs,categories,taglists,size}) => {
         return blogs.map((blog,index)=>(
             <article key={index}>
                 <Card blog={blog}/>
-                <hr style={{backgroundColor:"white",height:"2px",width:"100%"}}/>
+                <hr style={{backgroundColor:"white",height:"2px",width:"100%",filter:"blur(3px)"}}/>
             </article>
         ))
     }
+
+    const listAndDisplayAllTheCategories =() =>{
+        return categories.map((cat,index)=>{
+                return (
+                <Link href={`/categories/${cat.slug}`} key={index}>
+                <a className="btn btn-sm btn-success mr-1 ml-1 mt-3">{cat.name}</a>
+                </Link>
+                )
+        })
+    };
+
+    const listAndDisplayAllTheTaglists =() =>{
+        return taglists.map((tagg,index)=>{
+                return (
+                    <Link key={index} href={`/taglists/${tagg.slug}`}>
+                    <a className="btn btn-sm btn-info mr-1 ml-1 mt-3 mb-4">{tagg.name}</a>
+                </Link>
+                )
+        })
+    };
 
     return (
         <>
@@ -27,7 +49,13 @@ const Blogs = ({blogs,categories,taglists,size}) => {
                             <h1 className="display-4 font-weight-bold text-center">Tech Blogs</h1>
                         </div>
                         <section>
-                            <p>show categories and tags</p>
+                            <div className="pb-5 text-center">
+                            <CategoryIcon style={{color:"limegreen"}}/>{listAndDisplayAllTheCategories()}
+                                <br/>
+                                <LabelIcon style={{color:"teal"}}/>{listAndDisplayAllTheTaglists()} 
+                                {/* {JSON.stringify(taglists)} */}
+                                {/* {JSON.stringify(categories)} */}
+                            </div>
                         </section>
                     </header>
                 </div>

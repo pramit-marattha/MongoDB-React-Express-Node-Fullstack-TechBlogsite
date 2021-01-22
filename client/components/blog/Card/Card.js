@@ -5,6 +5,9 @@ import moment from 'moment';
 import { API } from '../../../config';
 import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import MoreIcon from '@material-ui/icons/More';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Card =({blog})=>{
 
@@ -33,10 +36,10 @@ const Card =({blog})=>{
     }; 
 
     return (
-    <div className="lead pb-4">
+    <div className="lead pb-4" style={{boxShadow:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.1px)",borderRadius:"5px"}}>
     <header>
         <Link href={`/blogs/${blog.slug}`}>
-            <a><h3 className="display-5 pt-3 pb-4 font-weight-bold">{blog.title}</h3></a>
+            <a><h3 className="display-5 pt-4 pb-2 font-weight-bold pl-5">{blog.title}</h3></a>
         </Link>
     </header>
         <section>
@@ -52,7 +55,7 @@ const Card =({blog})=>{
                 <section>
                     <div className="pb-3">{renderHTML(blog.excerpt)}</div>
                     <Link href={`/blogs/${blog.slug}`}>
-                        <a className="btn btn-info  pt-2">Read more</a>
+                        <a className="btn btn-info  pt-2">Read more <MoreIcon/></a>
                     </Link>
                 </section>
             </div>

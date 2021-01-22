@@ -160,9 +160,9 @@ exports.bloglistsallCategoriesTags =(req,res)=>{
                         error: errorHandler(err)
                     })
                 }
-                tags = tagg
+                taglists = tagg
                 // return all the categories ,tags and the blogs
-                res.json({blogs,categories,tags,size: blogs.length});
+                res.json({blogs,categories,taglists,size: blogs.length});
             })
         })
     })
