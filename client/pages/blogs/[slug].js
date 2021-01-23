@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import {withRouter} from "next/router";
 import Layout from '../../components/Layout';
 import React,{ useState,useEffect } from 'react';
 import { singleBlog } from '../../actions/blog';
@@ -13,7 +14,24 @@ import renderHTML from 'react-render-html';
 
 
 
-const SingleBlog = ({blog})=>{
+const SingleBlog = ({blog,query})=>{
+
+    const head = ()=>{
+        <Head>
+            <title>{blog.title} | {APP_NAME}</title>
+            <meta name="description" content={blog.mdesc}/>
+            <Link rel="cannonical" href={`${DOMAIN}/blogs/${query.slug}`} />
+            <meta property="og:title" content={`${blog.title} | ${APP_NAME}`}/>
+            <meta name="og:description" content={blog.mdesc}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`}/>    
+            <meta property="og:site_name" content={`${APP_NAME}`}/>
+            <meta property="og:image" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:secure_url" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:type" content="image/jpg"/>
+            {/* <meta property="og:site_name" content={`${APP_NAME}`}/> */}
+        </Head>
+    }
 
     const listAndDisplayAllCategories = blog => {
         return (
@@ -41,6 +59,7 @@ const SingleBlog = ({blog})=>{
 
     return (
         <>
+        {head()}
         <Layout>
             <main className="singleblog-background">
                 <article className="singleblog-foreground">
@@ -94,9 +113,9 @@ SingleBlog.getInitialProps=({query})=>{
         if (data.error){
             console.log(data.error)
         } else {
-            return {blog:data}
+            return {blog:data,query}
         }
     })
 }
 
-export default (SingleBlog);
+export default withRouter(SingleBlog);
