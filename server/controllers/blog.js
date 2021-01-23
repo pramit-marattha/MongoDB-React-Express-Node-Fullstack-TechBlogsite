@@ -171,7 +171,7 @@ exports.bloglistsallCategoriesTags =(req,res)=>{
 
 exports.read =(req,res)=>{
     const slug = req.params.slug.toLowerCase();
-    Blogs.findOne({slug}).populate("categories","_id name slug").populate("taglists","_id name slug").populate("postedBy","_id name username").select("_id title body slug mtitle mdesc categories taglists postedBy createdAt updatedAt").exec((err,data)=>{
+    Blog.findOne({slug}).populate("categories","_id name slug").populate("taglists","_id name slug").populate("postedBy","_id name username").select("_id title body slug mtitle mdesc categories taglists postedBy createdAt updatedAt").exec((err,data)=>{
         if (err){
             return res.json({
                 error: errorHandler(err)

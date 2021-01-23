@@ -39,7 +39,7 @@ const Card =({blog})=>{
     <div className="lead pb-4" style={{boxShadow:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.1px)",borderRadius:"17px"}}>
     <header>
         <Link href={`/blogs/${blog.slug}`}>
-            <a><h3 className="display-5 pt-4 pb-2 font-weight-bold pl-5">{blog.title}</h3></a>
+            <a target="_blank"><h3 className="display-5 pt-4 pb-2 font-weight-bold pl-5">{blog.title}</h3></a>
         </Link>
     </header>
         <section>
@@ -54,7 +54,7 @@ const Card =({blog})=>{
             <div className="col-md-8">
                 <section>
                     <div className="pb-3">{renderHTML(blog.excerpt)}</div>
-                    <Link href={`/blogs/${blog.slug}`}><a className="btn btn-info  pt-2">Read more<MoreIcon/></a></Link>
+                    <Link href={`/blogs/${blog.slug}`}><a className="btn btn-info  pt-2" target="_blank">Read more<MoreIcon/></a></Link>
                 </section>
             </div>
         </div>
