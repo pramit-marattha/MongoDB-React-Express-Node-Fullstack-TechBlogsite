@@ -43,7 +43,7 @@ const Card =({blog})=>{
         </Link>
     </header>
         <section>
-        <CategoryIcon style={{color:"limegreen"}}/>[{listAndDisplayAllCategories(blog)}]<LabelIcon style={{color:"teal"}}/>[{listAndDisplayAllTaglists(blog)}]
+        <CategoryIcon style={{color:"limegreen"}}/>{listAndDisplayAllCategories(blog)} <LabelIcon style={{color:"teal"}}/>{listAndDisplayAllTaglists(blog)}
         </section>
         <div className="row">
             <div className="col-md-4">

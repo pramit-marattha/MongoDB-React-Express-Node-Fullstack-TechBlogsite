@@ -25,6 +25,30 @@ html {
   scrollbar-width: none;
 }
 
+.blog-foreground {
+  backdrop-filter: blur(7px);
+}
+
 .ql-editor {
   min-height: 25rem;
+}
+
+.background-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.singleblog-background {
+  background: url("../assets/blackback.jpg") no-repeat center center fixed;
+  /* background: url("../assets/19390.jpg") no-repeat center center fixed; */
+  /* background: url("../assets/blackback.jpg") no-repeat center center fixed; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.singleblog-foreground {
+  backdrop-filter: blur(7px);
 }

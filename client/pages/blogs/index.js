@@ -97,7 +97,7 @@ const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}
         <>
         {head()}
         <Layout>
-            <main>
+            <main className="blog-foreground">
                 <div className="container-fluid">
                     <header>
                         <div className="col-md-12 pt-3">
