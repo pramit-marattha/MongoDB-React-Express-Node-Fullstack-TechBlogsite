@@ -278,14 +278,14 @@ exports.blogListRelated=(req,res)=>{
 
     // not including _id but including categories
     // while showing related blogs excluding the blog itself and showing other blogs instead
-    Blog.find({_id: {$ne: _id},categories: {$in: categories}}).limit(limit).populate('postedBy','_id name profile').select('slug excerpt postedBy createdAt updatedAt')
+    Blog.find({_id: {$ne: _id},categories: {$in: categories}}).limit(limit).populate('postedBy','_id name profile').select('slug title excerpt postedBy createdAt updatedAt')
     .exec((err,blogs)=>{
         if (err){
-            return res.status(400).json({
+            return res.status(400).json({   
                 error: "Blog not found"
             })
-            res.json(blogs)
         }
+        res.json(blogs);
     })
+};
 
-}

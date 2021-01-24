@@ -3,18 +3,49 @@ import Link from 'next/link';
 import {withRouter} from "next/router";
 import Layout from '../../components/Layout';
 import React,{ useState,useEffect } from 'react';
-import { singleBlog } from '../../actions/blog';
+import { singleBlog,blogListRelated } from '../../actions/blog';
 import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
 import {API,DOMAIN,APP_NAME} from '../../config';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import moment from 'moment';
 import renderHTML from 'react-render-html';
+import SmallCard from "../../components/blog/SmallCard";
+
 
 
 
 
 const SingleBlog = ({blog,query})=>{
+
+    const [showBlogRelated,setShowBlogRelated] = useState([]);
+
+    const loadBlogRelated = ()=>{
+        blogListRelated({blog}).then(data=>{
+            if(data.error){
+                console.log(data.error)
+            }else{
+                setShowBlogRelated(data);
+            }
+        })
+    };
+
+    const showingRelatedBlogs = ()=>{
+        return showBlogRelated.map((blog,index)=>{
+            return (
+                <div className="col-md-4" key={index}>
+                    <article>
+                        <SmallCard blog={blog}/>
+                    </article>
+                </div>
+            )
+        })
+    }
+
+    useEffect(()=>{
+        loadBlogRelated();
+    },[])
+
 
     const head = ()=>{
         <Head>
@@ -94,6 +125,10 @@ const SingleBlog = ({blog,query})=>{
                         <h4 className="text-center pb-5 pt-5 h2">Related Blogs</h4>
                         <hr/>
                         <p>Show Related Blogs</p>
+                        {/* {JSON.stringify(showBlogRelated)} */}
+                        <div className="row">
+                        {showingRelatedBlogs()}
+                        </div>
                     </div>
 
                         {/* Disqus commneting  */}
