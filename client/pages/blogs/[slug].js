@@ -124,7 +124,7 @@ const SingleBlog = ({blog,query})=>{
                     <div className="container pb-5">
                         <h4 className="text-center pb-5 pt-5 h2">Related Blogs</h4>
                         <hr/>
-                        <p>Show Related Blogs</p>
+                        {/* <p>Show Related Blogs</p> */}
                         {/* {JSON.stringify(showBlogRelated)} */}
                         <div className="row">
                         {showingRelatedBlogs()}

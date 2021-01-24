@@ -54,7 +54,7 @@ const Card =({blog})=>{
             <div className="col-md-8">
                 <section>
                     <div className="pb-3">{renderHTML(blog.excerpt)}</div>
-                    <Link href={`/blogs/${blog.slug}`}><a className="btn btn-info  pt-2" target="_blank">Read more<MoreIcon/></a></Link>
+                    <Link href={`/blogs/${blog.slug}`}><a className="btn btn-info  pt-2" target="_blank">Read more <MoreIcon/></a></Link>
                 </section>
             </div>
         </div>

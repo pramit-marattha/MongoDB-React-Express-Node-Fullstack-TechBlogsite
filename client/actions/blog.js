@@ -40,7 +40,7 @@ export const singleBlog = slug =>{
     }).then(response=>{
         return response.json()
     }).catch(err => console.log(err))
-}
+};
 
 export const blogListRelated = (blog) => {
     return fetch(`${API}/api/bloglists/related`, {
@@ -53,4 +53,44 @@ export const blogListRelated = (blog) => {
     }).then(response => {
             return response.json();
         }).catch(error => console.log(error));
+};
+
+export const listingTheBlog = slug =>{
+    return fetch(`${API}/api/bloglists`,{
+        method: 'GET'
+    }).then(response=>{
+        return response.json()
+    }).catch(err => console.log(err))
+};
+
+export const removingTheBlog = (slug,token) => {
+    return fetch(`${API}/api/blog/${slug}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization:`Bearer ${token}`
+
+        },
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => console.log(error));
+};
+
+export const updatingTheBlog = (blog,token,slug) => {
+    return fetch(`${API}/api/blog/${slug}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            Authorization:`Bearer ${token}`
+
+        },
+        body: blog
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => console.log(error));
 };
