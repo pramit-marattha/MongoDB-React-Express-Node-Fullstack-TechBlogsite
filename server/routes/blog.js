@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {create ,list,bloglistsallCategoriesTags,read,remove,update,photo} = require("../controllers/blog.js");
+const {create ,list,bloglistsallCategoriesTags,read,remove,update,photo,blogListRelated} = require("../controllers/blog.js");
 const {requireLogin,adminAuthenticationMiddleware} = require("../controllers/userAuthentication.js");
 
 router.post('/blog',requireLogin,adminAuthenticationMiddleware,create);
@@ -10,6 +10,6 @@ router.get('/blog/:slug',read);
 router.delete('/blog/:slug',requireLogin,adminAuthenticationMiddleware,remove);
 router.put('/blog/:slug',requireLogin,adminAuthenticationMiddleware,update);
 router.get('/blog/photo/:slug',photo);
-
+router.post('/bloglists/related',blogListRelated);
 
 module.exports = router;
