@@ -10,6 +10,7 @@ import BookIcon from '@material-ui/icons/Book';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 // import MenuIcon from "@material-ui/icons/Menu";
 // import BigMenu from "@material-ui/icons/MenuIcons";
+import CreateIcon from '@material-ui/icons/Create';
 
 
 
@@ -21,9 +22,8 @@ const Editblog =() =>{
         <div className="row">
         <div className="col-md-12">
         <h1 className="text-center">
-        <PostAddIcon style={{"color":"pink"}}/>
-        Create a new blog
-        <BookIcon style={{"color":"teal"}}/>
+        Edit Blogs
+        <CreateIcon style={{"color":"teal"}}/>
         </h1>
         </div>
         <div className="col-md-12">
