@@ -4,7 +4,7 @@ import {APP_NAME} from "../config.js";
 import NProgress from "nprogress";
 import {logout,isAuthenticated} from "../actions/authentication.js";
 import Router from "next/router";
-import {useLoaded} from "../Hooks/useLoaded";
+import {useLoaded} from "../hooks/useLoaded";
 import BookIcon from '@material-ui/icons/Book';
 import {
   Collapse,
