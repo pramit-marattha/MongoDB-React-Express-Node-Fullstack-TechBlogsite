@@ -1,14 +1,18 @@
 import Layout from "../../../components/Layout";
 import Admin from "../../../components/authentication/Admin";
-import Category from "../../../components/update/Category";
-import Tag from "../../../components/update/Tag";
+import UpdateNewBlog from "../../../components/update/UpdateNewBlog";
+
 import Link from "next/link";
 import CategoryIcon from '@material-ui/icons/Category';
 import AddIcon from '@material-ui/icons/Add';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import BookIcon from '@material-ui/icons/Book';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+// import MenuIcon from "@material-ui/icons/Menu";
+// import BigMenu from "@material-ui/icons/MenuIcons";
 
 
-const CategoryTag =() =>{
+const Createblog =() =>{
     return(
         <Layout>
         <Admin>
@@ -16,22 +20,19 @@ const CategoryTag =() =>{
         <div className="row">
         <div className="col-md-12">
         <h1 className="text-center">
-        <CategoryIcon style={{"color":"teal"}}/>
-        Create Catagories and Tags
-        <LocalOfferIcon style={{"color":"red"}}/>
+        <PostAddIcon style={{"color":"pink"}}/>
+        Update Blog
+        <BookIcon style={{"color":"teal"}}/>
         </h1>
         </div>
-        <div className="col-md-6 pt-5 pb-5">
-        <Category/>
-        </div>
-        <div className="col-md-6 pt-5 pb-5">
-            <Tag/>
+        <div className="col-md-12">
+        <UpdateNewBlog/>
         </div>
         </div>
         </div>
         </Admin>
         </Layout>
-    )
+    );
 }
 
-export default CategoryTag;
+export default Createblog;

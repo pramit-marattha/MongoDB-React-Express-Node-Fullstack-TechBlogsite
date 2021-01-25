@@ -8,6 +8,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import moment from "moment";
+import CreateIcon from '@material-ui/icons/Create';
 
 const ReadNewBlog = () => {
     const [blogs,setBlogs] = useState([])
@@ -43,7 +44,23 @@ const ReadNewBlog = () => {
         if (answer){
             deleteTheBlog(slug)
         }
-    }
+    };
+
+    const showEditButton= blog =>{
+        if (isAuthenticated() && isAuthenticated().role === 0){
+            return (
+                <Link href={`/userDashboard/update/${blog.slug}`}>
+                    <a className="ml-3 btn btn-sm btn-warning"><CreateIcon/> Edit</a>
+                </Link>
+            );
+        } else if (isAuthenticated() && isAuthenticated().role === 1){
+            return (
+                <Link href={`/adminDashboard/update/${blog.slug}`}>
+                    <a className="ml-3 btn btn-sm btn-warning"><CreateIcon/> Edit</a>
+                </Link>
+            )
+        }
+    };
 
     const showingAllBlogs=()=>{
         return blogs.map((blog,index)=>{
@@ -52,7 +69,8 @@ const ReadNewBlog = () => {
                     <h3>{blog.title}</h3>
             <div style={{backgroundColor:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.7px)",fontSize:"15px"}}> Author : {blog.postedBy.name} | Published {moment(blog.updatedAt).fromNow()} </div>
                <button className="btn btn-sm btn-danger" onClick={() => deleteConfirmation(blog.slug)}><DeleteForeverIcon/> Delete</button>
-               
+               {showEditButton(blog)}
+               {/* {console.log("role",isAuthenticated().role)} */}
                 </div>
             )
         })
@@ -70,6 +88,6 @@ const ReadNewBlog = () => {
         </div>
         </>
     )
-}
+};
 
 export default ReadNewBlog;
