@@ -15,22 +15,13 @@ const Index =() =>{
 
     return(
       <>
-      {/* <Layout> */}
-        {/* <div className="landing__background"> */}
-        {/* <Layout> */}
-        {/* <Link href="/signup"><a>Signup</a></Link> */}
-        {/* <br/> */}
-        {/* <Link href="/login"><a>Login</a></Link> */} 
-        {/* <br/> */}
-        {/* <h2 style={{color:"white"}}>Welcome Home Page</h2> */}
-        {/* </Layout> */}
-    {/* </div> */}
-    {/* </Layout> */}
-    {/* <Layout> */}
-
     <LandingLayout
-				title={' - Desarrollo web a medida'}
-				MetaDescription="Somos una empresa especializada en diseño y desarrollo de sitios y aplicaciones web a la medida. Creamos productos software con altos estándares de calidad basados en tecnologías ligeras que permiten a los usuarios tener una grata experiencia en Internet."
+				title={'Tech Blogsite'}
+				MetaDescription="Welcome to the Tech blogsite a very easy and elegant way to create and to browse a blog
+              which is built entirely on MERN stack.
+              The frontend of this site is created using nextjs and reactjs.
+              Express and node is running on the backend and MongoDb is used as an Database for storing blogs as well as  user profiles.
+              Join now and create your very own blog without any hassle."
 			>
         <div style={{backgroundColor:"white"}}>
 				<section className="hero">
@@ -103,11 +94,6 @@ const Index =() =>{
 						<p>
             Each of blogs are curated from a detailed study, so it is attractive as well as informative. As always, following the current technical requirements and standards of the industry.The main purpose of this blogsite is to impact the whole world by providing them free technical skills, information and knowledge about technologies completely for free.
 						</p>
-						{/* <Link href="/blogs">
-							<a className="button-black selectionNone">
-								<div><BookIcon/> Blogs</div>
-							</a>
-						</Link> */}
 					</div>
 				</section>
         
@@ -153,10 +139,6 @@ const Index =() =>{
 				</section>
         </div>
 			</LandingLayout>
-
-      {/* </Layout> */}
-      
-
     </>
     )
 }
