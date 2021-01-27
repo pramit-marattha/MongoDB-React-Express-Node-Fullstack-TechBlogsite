@@ -9,7 +9,7 @@ import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
 import {API,DOMAIN,APP_NAME} from '../../config';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+// import "./blogs.module.scss";
 
 const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}) => {
     const head = ()=>{

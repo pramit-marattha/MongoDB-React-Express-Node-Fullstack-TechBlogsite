@@ -5,10 +5,13 @@ Fullstack Blogsite built using React as a frontend , express js (backend framewo
 ## Current Progress
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/37651620/105505024-8c426500-5cf0-11eb-8604-61fb561cc4fe.jpg" alt="drawing" width="100"/>
+<img src="https://user-images.githubusercontent.com/37651620/105505024-8c426500-5cf0-11eb-8604-61fb561cc4fe.jpg" alt="under construction" width="100"/>
 </p>
-<img src="https://user-images.githubusercontent.com/37651620/105505774-77b29c80-5cf1-11eb-8487-4b52ce091a06.png" alt="drawing" width="auto"/>
-<img src="https://user-images.githubusercontent.com/37651620/105505790-7bdeba00-5cf1-11eb-899b-1274157939fe.png" alt="drawing" width="auto"/>
+
+![landingPage](https://user-images.githubusercontent.com/37651620/105988608-021b4780-60c8-11eb-9d55-e60e5db8b61a.png)
+
+<img src="https://user-images.githubusercontent.com/37651620/105505774-77b29c80-5cf1-11eb-8487-4b52ce091a06.png" alt="login" width="auto"/>
+<img src="https://user-images.githubusercontent.com/37651620/105505790-7bdeba00-5cf1-11eb-899b-1274157939fe.png" alt="register" width="auto"/>
 <img src="https://user-images.githubusercontent.com/37651620/105528269-e18c6f80-5d0c-11eb-839b-60d5925e4cf8.png" alt="drawing" width="auto"/>
 <img src="https://user-images.githubusercontent.com/37651620/105528283-e4876000-5d0c-11eb-90d1-a76bb1a9859d.png" alt="drawing" width="auto"/>
 <p align="center">

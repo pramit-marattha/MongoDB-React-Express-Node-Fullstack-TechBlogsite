@@ -41,12 +41,18 @@ const Header = (props) => {
 
   return (
     <>
-      <Navbar style={{boxShadow:"inset 0 0 2000px rgba(204, 255, 204, 0.4)",filter:"blur(0.4px)"}} light expand="md">
+      <Navbar style={{boxShadow:"inset 0 0 2000px rgba(204, 255, 204, 0.4)",filter:"blur(0.4px)",maxHeight:"6rem"}} light expand="md">
       {/* <ComputerIcon style={{color:"teal"}}/> */}
+      <Link href={`/`}>
+      <a style={{paddingLeft:"4rem"}}>
+    <img style={{maxWidth:"6rem",maxHeight:"auto"}} src="/static/assets/Blog-Post.png" alt="blog image"/>
+    </a>
+    </Link>
         <Link href="/" className="font-weight-bold">
           <a className="pl-3 pt-3 h3" style={{color:"white"}}><Typical steps={['TECH', 1000,'BLOG', 500,'SITE', 500,'TECHBLOGSITE', 500]} loop={Infinity} wrapper="p"/></a>
         </Link>
         <NavbarToggler onClick={toggle} />
+        
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
 
@@ -77,15 +83,14 @@ const Header = (props) => {
                 </button>
             </NavItem>
               <div style={{ padding:"10px"}}></div>
-                <button className="btn btn-info">
             <NavItem>
+                <button style={{padding:"-10px"}} className="btn btn-info">
               <NavLink href="/signup">
               <PersonAddIcon/>
                 Resgister
               </NavLink>
+              </button>
             </NavItem>
-
-            </button>
              </>
            )}
 
