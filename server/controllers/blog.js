@@ -223,7 +223,7 @@ exports.update = (req, res) => {
             const { body, mdesc, categories, taglists } = fields;
 
             if (body) {
-                oldBlog.excerpt = smartTrim(body, 320, ' ', ' ...');
+                oldBlog.excerpt = excerptTrim(body, 320, ' ', ' ...');
                 oldBlog.mdesc = stripHtml(body.substring(0, 160));
             }
 

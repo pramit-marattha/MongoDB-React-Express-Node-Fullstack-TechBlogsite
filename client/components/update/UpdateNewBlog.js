@@ -10,6 +10,7 @@ import {getTagLists} from "../../actions/tag";
 import {singleBlog,updatingTheBlog} from "../../actions/blog";
 import PublishIcon from '@material-ui/icons/Publish';
 import {ReactQuillModules,ReactQuillFormats} from "../../helpers/ReactQuill";
+import {API} from "../../config";
 
 
 // dynamically importing react quill
@@ -28,11 +29,11 @@ const UpdateNewBlog = ({router}) =>{
         error: '',
         success: '',
         formData: '',
-        title: '',
         body: ''
     });
 
     const {title, error, success, formData } = infos;
+    const token = getCookie('token');
 
 
     useEffect(()=>{
@@ -42,14 +43,40 @@ const UpdateNewBlog = ({router}) =>{
         initializeTaglists();
     },[router]);
 
-    const handleBody = e =>{
-        setBody(e)
-        formData.set('body',e)
+    const handleBody = event =>{
+        setBody(event)
+        formData.set('body',event)
     };
 
-    const editingTheBlog = ()=>{
-        console.log('update')
+    const editingTheBlog = event =>{
+        event.preventDefault();    
+        updatingTheBlog(formData,token,router.query.slug).then(data=>{
+            if(data.error){
+                setInfos({...infos,error:data.error})
+            } else{
+                setInfos({...infos,title:'',success:`${data.title} is successfully edited `})
+                if (isAuthenticated() && isAuthenticated().role === 1){
+                    Router.replace(`/adminDashboard/update/${router.query.slug}`)
+                    // Router.replace(`/adminDashboard`)
+                } else if (isAuthenticated() && isAuthenticated().role === 0){
+                    Router.replace(`/userDashboard/update/${router.query.slug}`)
+                    // Router.replace(`/userDashboard}`)
+                }
+            }
+        })    
     };
+
+    const showError = () => (
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
+            {success}
+        </div>
+    );
     
     const initializeBlog =()=>{
         if(router.query.slug){
@@ -70,7 +97,7 @@ const UpdateNewBlog = ({router}) =>{
         let catArray =[]
         blogCategories.map((cat,index)=>{
             catArray.push(cat._id)
-        })
+        });
         setChecked(catArray)
     };
 
@@ -144,20 +171,20 @@ const UpdateNewBlog = ({router}) =>{
     const searchSkimCategory = cat =>{
         const result = checked.indexOf(cat) // it will return true or -1 
         if (result !== -1) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
     };
 
     const searchSkimTag= tagg =>{
         const result = checkedTag.indexOf(tagg) // it will return true or -1 
         if (result !== -1) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
-    }
+    };
 
     const displayCategories = () => {
         return (
@@ -182,8 +209,6 @@ const UpdateNewBlog = ({router}) =>{
             ))
         );
     };
-
-
 
 
     const editingTheBlogForm = () => {
@@ -222,6 +247,10 @@ const UpdateNewBlog = ({router}) =>{
                 <div >
                     <div className="form-group pb-2">
                         <h4>Featured Background Image</h4>
+
+                        {body && (
+                        <img src={`${API}/api/blog/photo/${router.query.slug}`} alt={title} style={{ width: '100%' }} />
+                    )}
                         <hr style={{backgroundColor:"white"}}/>
                         <small className="text-muted">Maximum file size : 1024kb </small>
                         <label className="btn btn-outline-success">Upload Image
@@ -245,7 +274,8 @@ const UpdateNewBlog = ({router}) =>{
                 </div>
                 <div className="col-md-8">
                     {editingTheBlogForm()}
-                    <p>Show Sucess and error Message</p>
+                    {showSuccess()}
+                    {showError()}
                     {/* {displayError()}
                     {displaySuccess()}
                     {createBlogForm()} */}
