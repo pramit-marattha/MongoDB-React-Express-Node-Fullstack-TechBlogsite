@@ -17,6 +17,12 @@ const ReactQuill = dynamic(() => import("react-quill"),{ssr:false});
 
 const UpdateNewBlog = ({router}) =>{
     const [body,setBody] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [taglists, setTaglists] = useState([]);
+
+    const [checked, setChecked] = useState([]); // categories
+    const [checkedTag, setCheckedTag] = useState([]); // taglists
+
     const [infos, setInfos] = useState({
         title:'',
         error: '',
@@ -32,6 +38,8 @@ const UpdateNewBlog = ({router}) =>{
     useEffect(()=>{
         setInfos({ ...infos, formData: new FormData() });
         initializeBlog();
+        initializeCategories();
+        initializeTaglists();
     },[router]);
 
     const handleBody = e =>{
@@ -51,9 +59,27 @@ const UpdateNewBlog = ({router}) =>{
                 }else{
                     setInfos({...infos,title:data.title});
                     setBody(data.body);
+                    setCategoriesArray(data.categories)
+                    setTaglistsArray(data.taglists)
                 }
             })
         }
+    };
+
+    const setCategoriesArray=blogCategories =>{
+        let catArray =[]
+        blogCategories.map((cat,index)=>{
+            catArray.push(cat._id)
+        })
+        setChecked(catArray)
+    };
+
+    const setTaglistsArray=blogTaglists =>{
+        let tagArray =[]
+        blogTaglists.map((tagg,index)=>{
+            tagArray.push(tagg._id)
+        })
+        setCheckedTag(tagArray)
     };
 
     const handleChange = name => event => {
@@ -62,6 +88,102 @@ const UpdateNewBlog = ({router}) =>{
         formData.set(name, value);
         setInfos({ ...infos, [name]: value, formData, error: '' });
     };
+
+    const initializeCategories = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setInfos({ ...infos, error: data.error });
+            } else {
+                setCategories(data);
+            }
+        });
+    };
+
+    const initializeTaglists = () => {
+        getTagLists().then(data => {
+            if (data.error) {
+                setInfos({ ...infos, error: data.error });
+            } else {
+                setTaglists(data);
+            }
+        });
+    };
+
+    const handleCategoriesToggle = cat => () => {
+        setInfos({ ...infos, error: '' });
+        // return the first index or -1
+        const clickedCategory = checked.indexOf(cat);
+        const all = [...checked];
+
+        if (clickedCategory === -1) {
+            all.push(cat);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+        console.log(all);
+        setChecked(all);
+        formData.set('categories', all);
+    };
+
+    const handleTaglistsToggle = tagg => () => {
+        setInfos({ ...infos, error: '' });
+        // return the first index or -1
+        const clickedTags = checkedTag.indexOf(tagg);
+        const all = [...checkedTag];
+
+        if (clickedTags === -1) {
+            all.push(tagg);
+        } else {
+            all.splice(clickedTags, 1);
+        }
+        console.log(all);
+        setCheckedTag(all);
+        formData.set('taglists', all);
+    };
+
+    const searchSkimCategory = cat =>{
+        const result = checked.indexOf(cat) // it will return true or -1 
+        if (result !== -1) {
+            return true
+        } else {
+            return false
+        }
+    };
+
+    const searchSkimTag= tagg =>{
+        const result = checkedTag.indexOf(tagg) // it will return true or -1 
+        if (result !== -1) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const displayCategories = () => {
+        return (
+            categories &&
+            categories.map((cat, index) => (
+                <li key={index} className="list-unstyled">
+                    <input onChange={handleCategoriesToggle(cat._id)} checked={searchSkimCategory(cat._id)} type="checkbox" className="mr-2" />
+                    <label className="form-check-label">{cat.name}</label>
+                </li>
+            ))
+        );
+    };
+
+    const displayTaglists = () => {
+        return (
+            taglists &&
+            taglists.map((tagg, index) => (
+                <li key={index} className="list-unstyled">
+                    <input onChange={handleTaglistsToggle(tagg._id)} checked={searchSkimTag(tagg._id)} type="checkbox" className="mr-2" />
+                    <label className="form-check-label">{tagg.name}</label>
+                </li>
+            ))
+        );
+    };
+
+
 
 
     const editingTheBlogForm = () => {
@@ -111,13 +233,13 @@ const UpdateNewBlog = ({router}) =>{
                     <div>
                         <h5>Select Categories</h5>
                         <hr style={{backgroundColor:"white"}}/>
-                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>display categories</ul>
+                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayCategories()}</ul>
                     </div>
                     <div>
                     <hr style={{backgroundColor:"white"}}/>
                         <h5>Select Tags</h5>
                         <hr style={{backgroundColor:"white"}}/>
-                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>display taglists</ul>
+                        <ul style={{ maxHeight: '170px', overflowY: 'scroll' }}>{displayTaglists()}</ul>
                         
                     </div>
                 </div>
