@@ -18,6 +18,23 @@ import SmallCard from "../../components/blog/SmallCard";
 
 const SingleBlog = ({blog,query})=>{
 
+    const head = ()=>(
+        <Head>
+            <title>{blog.title} | {APP_NAME}</title>
+            <meta name="description" content={blog.mdesc}/>
+            <link rel="cannonical" href={`${DOMAIN}/blogs/${query.slug}`} />
+            <meta property="og:title" content={`${blog.title} | ${APP_NAME}`}/>
+            <meta name="og:description" content={blog.mdesc}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`}/>    
+            <meta property="og:site_name" content={`${APP_NAME}`}/>
+            <meta property="og:image" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:secure_url" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:type" content="image/jpg"/>
+            {/* <meta property="og:site_name" content={`${APP_NAME}`}/> */}
+        </Head>
+    );
+
     const [showBlogRelated,setShowBlogRelated] = useState([]);
 
     const loadBlogRelated = ()=>{
@@ -47,22 +64,7 @@ const SingleBlog = ({blog,query})=>{
     },[])
 
 
-    const head = ()=>{
-        <Head>
-            <title>{blog.title} | {APP_NAME}</title>
-            <meta name="description" content={blog.mdesc}/>
-            <Link rel="cannonical" href={`${DOMAIN}/blogs/${query.slug}`} />
-            <meta property="og:title" content={`${blog.title} | ${APP_NAME}`}/>
-            <meta name="og:description" content={blog.mdesc}/>
-            <meta property="og:type" content="website"/>
-            <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`}/>    
-            <meta property="og:site_name" content={`${APP_NAME}`}/>
-            <meta property="og:image" content={`${API}/api/blog/photo/${blog.slug}`}/>
-            <meta property="og:image:secure_url" content={`${API}/api/blog/photo/${blog.slug}`}/>
-            <meta property="og:image:type" content="image/jpg"/>
-            {/* <meta property="og:site_name" content={`${APP_NAME}`}/> */}
-        </Head>
-    }
+    
 
     const listAndDisplayAllCategories = blog => {
         return (

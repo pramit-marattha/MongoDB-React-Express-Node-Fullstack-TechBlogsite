@@ -13,9 +13,27 @@ import Card from "../../components/blog/Card";
 
 
 
-const Category = ({category,blogs})=>{
+const Category = ({category,blogs,query})=>{
+    const head = ()=>(
+        <Head>
+            <title>{category.name} | {APP_NAME}</title>
+            <meta name="description" content={`Best ever tutorials on ${category.name}`}/>
+            <link rel="cannonical" href={`${DOMAIN}/categories/${query.slug}`} />
+            <meta property="og:title" content={`${category.name} | ${APP_NAME}`}/>
+            <meta name="og:description" content={`Best ever tutorials on ${category.name}`}/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:url" content={`${DOMAIN}/categories/${query.slug}`}/>    
+            <meta property="og:site_name" content={`${APP_NAME}`}/>
+            <meta property="og:image" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:secure_url" content={`${API}/api/blog/photo/${blog.slug}`}/>
+            <meta property="og:image:type" content="image/jpg"/>
+            {/* <meta property="og:site_name" content={`${APP_NAME}`}/> */}
+        </Head>
+    );
+
     return (
         <>
+        {head()}
             <Layout>
                 <main>
                     <div className="container-fluid text-center">
@@ -45,7 +63,7 @@ Category.getInitialProps = ({query}) =>{
         if(data.error){
             console.log(data.error)
         } else {
-            return {category: data.category, blogs:data.blogs}
+            return {category: data.category, blogs:data.blogs,query}
         }
     })
 };
