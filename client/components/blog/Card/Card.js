@@ -9,6 +9,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import MoreIcon from '@material-ui/icons/More';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+
 const Card =({blog})=>{
 
     const listAndDisplayAllCategories = blog => {
@@ -36,6 +37,7 @@ const Card =({blog})=>{
     }; 
 
     return (
+        <>
     <div className="lead pb-4" style={{boxShadow:"inset 0 0 2000px rgba(255, 255, 255, .5)",filter:"blur(0.1px)",borderRadius:"17px"}}>
     <header>
         <Link href={`/blogs/${blog.slug}`}>
@@ -64,6 +66,8 @@ const Card =({blog})=>{
         </p>
     </section>
 </div>
+
+</>
     )};
 
 export default Card;

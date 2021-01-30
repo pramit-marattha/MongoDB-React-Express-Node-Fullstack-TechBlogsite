@@ -52,6 +52,8 @@ const Header = (props) => {
           <a className="pl-3 pt-3 h3" style={{color:"white"}}><Typical steps={['TECH', 1000,'BLOG', 500,'SITE', 500,'TECHBLOGSITE', 500]} loop={Infinity} wrapper="p"/></a>
         </Link>
         <NavbarToggler onClick={toggle} />
+
+
         
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -141,7 +143,9 @@ const Header = (props) => {
           </Nav>
         </Collapse>
       </Navbar>
+
     </>
+    
   );
 }
 

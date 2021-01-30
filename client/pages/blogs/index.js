@@ -9,6 +9,8 @@ import LabelIcon from '@material-ui/icons/Label';
 import CategoryIcon from '@material-ui/icons/Category';
 import {API,DOMAIN,APP_NAME} from '../../config';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Search from "../../components/blog/Search";
+
 
 const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}) => {
     const head = ()=>{
@@ -98,6 +100,7 @@ const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}
         <Layout>
             <main className="blog-foreground">
                 <div className="container-fluid">
+                     <Search/>
                     <header>
                         <div className="col-md-12 pt-3">
                             <h1 className="display-4 font-weight-bold text-center">Tech Blogs</h1>
@@ -110,11 +113,13 @@ const Blogs = ({blogs,categories,taglists,totalBlogs,blogsLimit,blogSkip,router}
                             </div>
                         </section>
                     </header>
+
                 </div>
                 <div className="container-fluid">{listAndDisplayAllBlogs()}</div>
                 <div className="container-fluid">{showingAllLoadedBlogs()}</div>
                 <div className="text-center pt-3 pb-5">{loadMoreBlogButton()}</div>
             </main>
+
         </Layout>   
         </>
     );

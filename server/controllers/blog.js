@@ -303,5 +303,5 @@ exports.listSearchItems=(req,res)=>{
             res.json(blogs)
         }).select("-photo -body");
     }
-}
+};
 
