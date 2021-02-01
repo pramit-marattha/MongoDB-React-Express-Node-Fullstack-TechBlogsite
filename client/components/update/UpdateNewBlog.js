@@ -254,7 +254,7 @@ const UpdateNewBlog = ({router}) =>{
                         <hr style={{backgroundColor:"white"}}/>
                         <small className="text-muted">Maximum file size : 1024kb </small>
                         <label className="btn btn-outline-success">Upload Image
-                        <input type="file" accept="image/*" hidden/>
+                        <input onChange={handleChange("photo")} type="file" accept="image/*" hidden/>
                         {/* <img src={handleChange(setInfos([name]))}/> */} 
                         </label>
                     </div>
@@ -273,9 +273,9 @@ const UpdateNewBlog = ({router}) =>{
                     </div>
                 </div>
                 <div className="col-md-8">
-                    {editingTheBlogForm()}
-                    {showSuccess()}
+                 {showSuccess()}
                     {showError()}
+                    {editingTheBlogForm()}
                     {/* {displayError()}
                     {displaySuccess()}
                     {createBlogForm()} */}
