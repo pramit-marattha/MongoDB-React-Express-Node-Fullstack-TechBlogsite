@@ -29,6 +29,9 @@ exports.publicProfileReadRequest=(req,res)=>{
                 })
             }
             user.photo = undefined
+            res.json({
+                user,blogs: data
+            })
         })
     })
 } 
